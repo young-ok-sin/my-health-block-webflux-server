@@ -12,30 +12,31 @@ import lombok.RequiredArgsConstructor;
 @RestController
 @RequestMapping("/api")
 public class ApiController {
-//    private final ApiService apiService;
+    private final ApiService apiService;
     @PostMapping("/v1/medical-api/medical-history/first-request")
     public String requestMedicalHistory(@RequestBody MedicalHistoryFirstRequestDTO request) {
-        System.out.println("request.toString() = " + request.toString());
+        System.out.println(apiService.requestMedicalHistory());
+
         return "a";
     }
 
     @PostMapping("/v1/medical-api/treatment-imformation/first-request")
     public String requestTreatmentImformation(@RequestBody TreatmentInfoFirstRequestDTO request) {
-        System.out.println("request.toString() = " + request.toString());
+        System.out.println(apiService.requestTreatmentImformation());
 
         return "a";
     }
 
     @PostMapping("/v1/medical-api/health-checkup-result/first-request")
     public String requestHealthCheckupResult(@RequestBody HealthCheckupFirstRequestDTO request) {
-        System.out.println("request.toString() = " + request.toString());
+        System.out.println(apiService.requestHealthCheckupResult());
 
         return "a";
     }
 
     @PostMapping("/v1/medical-api/second-request")
     public String requestSecond(@RequestBody SecondRequestDTO request) {
-        System.out.println("request.toString() = " + request.toString());
+        System.out.println(apiService.requestSecond());
 
         return "a";
     }
