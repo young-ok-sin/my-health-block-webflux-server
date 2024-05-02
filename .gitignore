@@ -1,4 +1,4 @@
-./src/main/java/com/example/myhealthblock/api/healthdata/specific
+src/main/java/com/example/myhealthblock/api/healthdata/specific
 
 HELP.md
 .gradle
