@@ -2,25 +2,25 @@ package com.example.myhealthblock.api.healthdata;
 
 import org.springframework.stereotype.Service;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.RequestBody;
 
 @RequiredArgsConstructor
 @Service
 public class ApiService {
-//    private final ApiOutport apiOutport;
+    private final ApiOutport apiOutport = new ApiAdapter();
+
     public String requestMedicalHistory() {
-        return "requestMedicalHistory";
+        return apiOutport.requestMedicalHistory();
     }
 
     public String requestTreatmentImformation() {
-        return "requestTreatmentImformation";
+        return apiOutport.requestTreatmentImformation();
     }
 
     public String requestHealthCheckupResult() {
-        return "requestHealthCheckupResult";
+        return apiOutport.requestHealthCheckupResult();
     }
 
     public String requestSecond() {
-        return "requestSecond";
+        return apiOutport.requestSecond();
     }
 }
