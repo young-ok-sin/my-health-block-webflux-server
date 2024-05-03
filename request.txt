@@ -1,0 +1,19 @@
+### 테스트 - 유저 회원가입
+POST http://localhost:8080/api/test/sign-up
+content-type: application/json
+
+{
+    "id" : "id",
+    "pw" : "pw",
+    "role" : "role"
+}
+
+
+### 로그인
+POST http://localhost:8080/api/v1/sign-in
+content-type: application/json
+
+{
+    "id" : "id",
+    "pw" : "pw1"
+}
