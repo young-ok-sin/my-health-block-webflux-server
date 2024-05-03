@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import lombok.RequiredArgsConstructor;
 
+import java.util.Map;
+
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/api")
@@ -21,7 +23,7 @@ public class UserController {
     }
 
     @PostMapping("/v1/sign-in")
-    public String signIn(@RequestBody UserSignInDTO body) {
-        return userService.signIn(body);
+    public Map<String, String> signIn(@RequestBody UserSignInDTO body) {
+        return userService.signIn(body).getRequestBody();
     }
 }
