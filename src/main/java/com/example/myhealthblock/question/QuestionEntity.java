@@ -1,7 +1,5 @@
 package com.example.myhealthblock.question;
 
-import com.example.myhealthblock.Patient.PatientEntity;
-import com.example.myhealthblock.user.UserEntity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

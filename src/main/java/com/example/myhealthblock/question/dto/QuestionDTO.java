@@ -10,7 +10,7 @@ public class QuestionDTO {
     Integer id;
     String uid;
     String title;
-    Enum category;
+    Category category;
     String symptom;
     String content;
 

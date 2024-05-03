@@ -1,6 +1,5 @@
 package com.example.myhealthblock.question;
 
-import com.example.myhealthblock.Patient.PatientEntity;
 import com.example.myhealthblock.question.dto.QuestionDTO;
 
 public interface QuestionOutport {
