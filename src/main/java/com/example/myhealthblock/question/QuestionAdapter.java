@@ -15,6 +15,7 @@ public class QuestionAdapter implements QuestionOutport {
     private final QuestionRepository questionRepository;
     private final PatientRepository patientRepository;
     private final PersonalDataRepository personalDataRepository;
+    private final BodyMappingRepository bodyMappingRepository;
 
     @Override
     public boolean create(PatientEntity patient, String title, Category category, String symptom, String content, List<BodyPart> bodyParts, PersonalData personalData) {
@@ -23,7 +24,7 @@ public class QuestionAdapter implements QuestionOutport {
 
         for (BodyPart bodyPart : bodyParts) {
             BodyPartMappingEntity bodyPartMapping = new BodyPartMappingEntity(question, bodyPart);
-            question.addBodyPartMapping(bodyPartMapping);
+            bodyMappingRepository.save(bodyPartMapping);
         }
 
         PersonalDataEntity personalDataEntity = new PersonalDataEntity();
@@ -37,6 +38,7 @@ public class QuestionAdapter implements QuestionOutport {
         patientRepository.save(patient);
         return true;
     }
+
     private PersonalData getPersonalData(QuestionEntity questionEntity) {
         PersonalDataEntity personalDataEntity = this.personalDataRepository.findByQuestion(questionEntity);
         if (personalDataEntity != null) {
@@ -58,6 +60,10 @@ public class QuestionAdapter implements QuestionOutport {
         }
 
         PersonalData personalData = getPersonalData(questionEntity);
+        List<BodyPart> bodyParts = this.bodyMappingRepository.findByQuestion(questionEntity)
+                .stream()
+                .map(BodyPartMappingEntity::getBodyPart)
+                .collect(Collectors.toList());
 
         return new QuestionDTO(
                 questionEntity.getId(),
@@ -66,9 +72,7 @@ public class QuestionAdapter implements QuestionOutport {
                 questionEntity.getCategory(),
                 questionEntity.getSymptom(),
                 questionEntity.getContent(),
-                questionEntity.getBodyPartMappings().stream()
-                        .map(BodyPartMappingEntity::getBodyPart)
-                        .collect(Collectors.toList()),
+                bodyParts,
                 personalData
         );
     }
@@ -86,39 +90,33 @@ public class QuestionAdapter implements QuestionOutport {
     @Override
     public QuestionDTO[] getQuestions() {
         List<QuestionEntity> questionEntities = this.questionRepository.findAll();
-        return questionEntities.stream()
-                .map(q -> new QuestionDTO(
-                        q.getId(),
-                        q.getPatient().getUserId(),
-                        q.getTitle(),
-                        q.getCategory(),
-                        q.getSymptom(),
-                        q.getContent(),
-                        q.getBodyPartMappings().stream()
-                                .map(BodyPartMappingEntity::getBodyPart)
-                                .collect(Collectors.toList()),
-                        getPersonalData(q)
-                ))
-                .toArray(QuestionDTO[]::new);
+        return getQuestionDTOS(questionEntities);
     }
 
+    private QuestionDTO[] getQuestionDTOS(List<QuestionEntity> questionEntities) {
+        return questionEntities.stream()
+                .map(q -> {
+                    List<BodyPart> bodyParts = this.bodyMappingRepository.findByQuestion(q)
+                            .stream()
+                            .map(BodyPartMappingEntity::getBodyPart)
+                            .collect(Collectors.toList());
+                    return new QuestionDTO(
+                            q.getId(),
+                            q.getPatient().getUserId(),
+                            q.getTitle(),
+                            q.getCategory(),
+                            q.getSymptom(),
+                            q.getContent(),
+                            bodyParts,
+                            getPersonalData(q)
+                    );
+                })
+                .toArray(QuestionDTO[]::new);
+    }
 
     @Override
     public QuestionDTO[] getMyQuestions(PatientEntity patient) {
         List<QuestionEntity> questionEntities = this.questionRepository.findByPatient(patient);
-        return questionEntities.stream()
-                .map(q -> new QuestionDTO(
-                        q.getId(),
-                        q.getPatient().getUserId(),
-                        q.getTitle(),
-                        q.getCategory(),
-                        q.getSymptom(),
-                        q.getContent(),
-                        q.getBodyPartMappings().stream()
-                                .map(BodyPartMappingEntity::getBodyPart)
-                                .collect(Collectors.toList()),
-                        getPersonalData(q)
-                ))
-                .toArray(QuestionDTO[]::new);
+        return getQuestionDTOS(questionEntities);
     }
 }
