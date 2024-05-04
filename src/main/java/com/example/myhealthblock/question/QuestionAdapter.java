@@ -1,22 +1,53 @@
 package com.example.myhealthblock.question;
 
+import com.example.myhealthblock.Patient.PatientEntity;
+import com.example.myhealthblock.Patient.PatientRepository;
 import com.example.myhealthblock.question.dto.QuestionDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
-public class QuestionAdapter implements QuestionOutport{
+public class QuestionAdapter implements QuestionOutport {
     private final QuestionRepository questionRepository;
+    private final PatientRepository patientRepository;
+    private final PersonalDataRepository personalDataRepository;
 
     @Override
-    public boolean create(String uid, String title, Category category, String symptom, String content){
-        QuestionEntity q = new QuestionEntity(uid,title,category,symptom,content);
-        this.questionRepository.save(q);
+    public boolean create(PatientEntity patient, String title, Category category, String symptom, String content, List<BodyPart> bodyParts, PersonalData personalData) {
+        QuestionEntity question = new QuestionEntity(patient.getUserId(), title, category, symptom, content);
+        patient.addQuestion(question);
 
+        for (BodyPart bodyPart : bodyParts) {
+            BodyPartMappingEntity bodyPartMapping = new BodyPartMappingEntity(question, bodyPart);
+            question.addBodyPartMapping(bodyPartMapping);
+        }
+
+        PersonalDataEntity personalDataEntity = new PersonalDataEntity();
+        personalDataEntity.setQuestion(question);
+        personalDataEntity.setAge(personalData.getAge());
+        personalDataEntity.setGender(personalData.getGender());
+        personalDataEntity.setDisease(personalData.getDisease());
+        personalDataEntity.setMedication(personalData.getMedication());
+        personalDataRepository.save(personalDataEntity);
+
+        patientRepository.save(patient);
         return true;
+    }
+    private PersonalData getPersonalData(QuestionEntity questionEntity) {
+        PersonalDataEntity personalDataEntity = this.personalDataRepository.findByQuestion(questionEntity);
+        if (personalDataEntity != null) {
+            PersonalData personalData = new PersonalData();
+            personalData.setAge(personalDataEntity.getAge());
+            personalData.setGender(personalDataEntity.getGender());
+            personalData.setDisease(personalDataEntity.getDisease());
+            personalData.setMedication(personalDataEntity.getMedication());
+            return personalData;
+        }
+        return null;
     }
 
     @Override
@@ -25,28 +56,21 @@ public class QuestionAdapter implements QuestionOutport{
         if (questionEntity == null) {
             return null;
         }
+
+        PersonalData personalData = getPersonalData(questionEntity);
+
         return new QuestionDTO(
                 questionEntity.getId(),
-                questionEntity.getUserId(),
+                questionEntity.getPatient().getUserId(),
                 questionEntity.getTitle(),
                 questionEntity.getCategory(),
                 questionEntity.getSymptom(),
-                questionEntity.getContent()
+                questionEntity.getContent(),
+                questionEntity.getBodyPartMappings().stream()
+                        .map(BodyPartMappingEntity::getBodyPart)
+                        .collect(Collectors.toList()),
+                personalData
         );
-    }
-
-    @Override
-    public boolean update(int id, String title, Category category, String symptom, String content) {
-        QuestionEntity questionEntity = this.questionRepository.findById(id).orElse(null);
-        if (questionEntity == null) {
-            return false;
-        }
-        questionEntity.setTitle(title);
-        questionEntity.setCategory(category);
-        questionEntity.setSymptom(symptom);
-        questionEntity.setContent(content);
-        this.questionRepository.save(questionEntity);
-        return true;
     }
 
     @Override
@@ -65,28 +89,36 @@ public class QuestionAdapter implements QuestionOutport{
         return questionEntities.stream()
                 .map(q -> new QuestionDTO(
                         q.getId(),
-                        q.getUserId(),
+                        q.getPatient().getUserId(),
                         q.getTitle(),
                         q.getCategory(),
                         q.getSymptom(),
-                        q.getContent()
+                        q.getContent(),
+                        q.getBodyPartMappings().stream()
+                                .map(BodyPartMappingEntity::getBodyPart)
+                                .collect(Collectors.toList()),
+                        getPersonalData(q)
                 ))
                 .toArray(QuestionDTO[]::new);
     }
 
+
     @Override
-    public QuestionDTO[] getMyQuestions(String uid) {
-        List<QuestionEntity> questionEntities = this.questionRepository.findByUserId(uid);
+    public QuestionDTO[] getMyQuestions(PatientEntity patient) {
+        List<QuestionEntity> questionEntities = this.questionRepository.findByPatient(patient);
         return questionEntities.stream()
                 .map(q -> new QuestionDTO(
                         q.getId(),
-                        q.getUserId(),
+                        q.getPatient().getUserId(),
                         q.getTitle(),
                         q.getCategory(),
                         q.getSymptom(),
-                        q.getContent()
+                        q.getContent(),
+                        q.getBodyPartMappings().stream()
+                                .map(BodyPartMappingEntity::getBodyPart)
+                                .collect(Collectors.toList()),
+                        getPersonalData(q)
                 ))
                 .toArray(QuestionDTO[]::new);
     }
-
 }
