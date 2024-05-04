@@ -12,10 +12,6 @@ import lombok.Setter;
 @Table(name = "bodypartMapping")
 @NoArgsConstructor
 public class BodyPartMappingEntity {
-    public BodyPartMappingEntity(Integer questionId, BodyPart bodyPart){
-        this.question = new QuestionEntity(id);
-        this.bodyPart = bodyPart;
-    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
