@@ -12,9 +12,8 @@ import java.util.Date;
 
 @Getter
 @Setter
-@Entity
+@Entity(name = "opinion")
 @NoArgsConstructor
-@Table(name = "opinion")
 public class OpinionEntity {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;

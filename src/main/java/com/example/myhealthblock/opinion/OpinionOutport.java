@@ -1,6 +1,5 @@
 package com.example.myhealthblock.opinion;
 import com.example.myhealthblock.opinion.dto.OpinionDTO;
-import com.example.myhealthblock.question.QuestionEntity;
 import com.example.myhealthblock.user.UserEntity;
 
 public interface OpinionOutport {
