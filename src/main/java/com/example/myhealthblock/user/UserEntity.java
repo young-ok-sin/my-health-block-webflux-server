@@ -1,13 +1,11 @@
 package com.example.myhealthblock.user;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.example.myhealthblock.opinion.OpinionEntity;
+import jakarta.persistence.*;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -48,4 +46,8 @@ public class UserEntity {
     private LocalDateTime createDate;
 
     private LocalDateTime lastEditDate;
+
+    @OneToMany
+    @JoinColumn(name = "userId")
+    private List<OpinionEntity> opinions;
 }
