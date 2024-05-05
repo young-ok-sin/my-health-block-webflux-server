@@ -17,11 +17,8 @@ public class DoctorService {
         user.setId(dto.getId());
         user.setPw(dto.getPw());
         user.setRole(dto.getRole());
-        System.out.println(123);
         userInport.signUp(user);
-        System.out.println(123);
         boolean result = outport.create(dto.getId(), dto.getName(), dto.getField(), dto.getHospital(), dto.getIntroduction());
-        System.out.println(123);
         return result ? "success" : "fail";
     }
 }
