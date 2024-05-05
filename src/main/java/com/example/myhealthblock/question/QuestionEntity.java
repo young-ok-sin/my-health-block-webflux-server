@@ -1,6 +1,7 @@
 package com.example.myhealthblock.question;
 
 import com.example.myhealthblock.Patient.PatientEntity;
+import com.example.myhealthblock.opinion.OpinionEntity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -45,8 +46,11 @@ public class QuestionEntity {
     @OneToMany(mappedBy = "question", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<BodyPartMappingEntity> bodyPartMappings = new ArrayList<>();
 
-    public QuestionEntity(int id) {
-        this.id = id;
+    @OneToMany(mappedBy = "question", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<OpinionEntity> opinions = new ArrayList<>();
+
+    public QuestionEntity(int questionId) {
+        this.id = questionId;
     }
 
     public void addBodyPartMapping(BodyPartMappingEntity bodyPartMapping) {
