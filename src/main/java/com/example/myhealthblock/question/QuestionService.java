@@ -15,6 +15,7 @@ import lombok.RequiredArgsConstructor;
 public class QuestionService {
     private final QuestionAdapter outport;
     private final PatientService patientInport;
+//    private final GetPatientEntityDTO patientInport; DI 컨테이너 학습 후 적용
 
     public String enroll(QuestionEnrollDTO dto) {
         PatientEntityDTO patientDto = patientInport.getPatientEntityDTO(dto.getUserId());

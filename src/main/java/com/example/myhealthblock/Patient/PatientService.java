@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 
 @RequiredArgsConstructor
 @Service
-public class PatientService {
+public class PatientService implements GetPatientEntityDTO{
     private final PatientAdapter outport;
     private final UserService userInport;
 
@@ -28,6 +28,7 @@ public class PatientService {
         return result ? "success" : "fail";
     }
 
+    @Override
     public PatientEntityDTO getPatientEntityDTO(String uid) { // interface로 노출할 필요 존재
         return outport.getUserEntityDTO(uid);
     }

@@ -13,7 +13,7 @@ import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 @Service
-public class UserService {
+public class UserService implements GetUserEntityDTO{
     private final UserAdapter outport;
 
     public String signUp(UserSignUpDTO dto) {
@@ -31,6 +31,7 @@ public class UserService {
         return result;
     }
 
+    @Override
     public UserEntityDTO getUserEntityDTO(String userId) {
         return outport.getUserEntityDTO(userId);
     }

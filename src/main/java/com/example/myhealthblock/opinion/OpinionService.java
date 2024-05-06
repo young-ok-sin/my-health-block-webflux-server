@@ -15,6 +15,8 @@ public class OpinionService {
     private final OpinionAdapter outport;
     private final QuestionService questionInport;
     private final UserService userInport;
+    //    private final GetQuestionEntityDTO questionInport; DI 컨테이너 학습 후 적용
+    //    private final GetUserEntityDTO userInport; DI 컨테이너 학습 후 적용
 
     public String enroll(OpinionEnrollDTO dto) {
         QuestionEntityDTO questionDto = questionInport.getQuestionEntityDTO(dto.getQuestionId());
