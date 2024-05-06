@@ -1,4 +1,4 @@
-package com.example.myhealthblock.Patient;
+package com.example.myhealthblock.patient;
 
 import com.example.myhealthblock.question.QuestionEntity;
 import com.example.myhealthblock.user.UserEntity;

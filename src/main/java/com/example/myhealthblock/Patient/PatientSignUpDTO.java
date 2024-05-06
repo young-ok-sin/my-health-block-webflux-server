@@ -1,4 +1,4 @@
-package com.example.myhealthblock.Patient;
+package com.example.myhealthblock.patient;
 
 import lombok.Getter;
 import lombok.Setter;
