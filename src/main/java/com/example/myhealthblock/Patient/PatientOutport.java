@@ -7,5 +7,6 @@ public interface PatientOutport {
     public boolean create(String id);
     public PatientEntityDTO getUserEntityDTO(String id);
     public boolean enrollUrgentData(String id, String content);
+    public String getUrgentData(String id);
     public String getUrgentData(String id, String reason, String doctorId);
 }

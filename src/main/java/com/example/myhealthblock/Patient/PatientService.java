@@ -32,6 +32,9 @@ public class PatientService implements GetPatientEntityDTO, GetPatientUrgentData
         return result ? "success" : "fail";
     }
 
+    public String getMyUrgentData(PatientGetUrgentDataDTO dto){
+        return outport.getUrgentData(dto.getId());
+    }
     @Override
     public String getUrgentData(String id, String reason, String doctorId) {
         return outport.getUrgentData(id, reason, doctorId);

@@ -33,8 +33,13 @@ public class PatientAdapter implements PatientOutport {
     }
 
     @Override
+    public String getUrgentData(String id) {
+        return getPatientEntity(id).getUrgentData();
+    }
+
+    @Override
     public String getUrgentData(String id, String reason, String doctorId) {
-        String data = getPatientEntity(id).getUrgentData();
+        String data = getUrgentData(id);
         UrgentDataSearchHistoryEntity history = new UrgentDataSearchHistoryEntity();
         history.setDoctorId(doctorId);
         history.setContent(data);
