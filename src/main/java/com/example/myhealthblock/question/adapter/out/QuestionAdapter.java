@@ -30,10 +30,11 @@ public class QuestionAdapter implements QuestionOutport {
     @Override
     public boolean create(PatientEntity patient, String title, Category category, String symptom, String content, List<BodyPart> bodyParts, PersonalData personalData) {
         QuestionEntity question = new QuestionEntity(patient, title, category, symptom, content);
+        questionRepository.save(question);
+
         insertPatient(question, patient);
         insertBodyParts(question, bodyParts);
         insertPersonalData(question, personalData);
-        questionRepository.save(question);
 
         return true;
     }
