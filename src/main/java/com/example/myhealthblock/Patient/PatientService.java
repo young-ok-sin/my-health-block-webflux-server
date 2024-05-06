@@ -28,6 +28,11 @@ public class PatientService implements GetPatientEntityDTO{
         return result ? "success" : "fail";
     }
 
+    public String enrollUrgentData(PatientEnrollUrgentDataDTO dto){
+        boolean result = outport.enrollUrgentData(dto.getId(), dto.getContent());
+        return result ? "success" : "fail";
+    }
+
     @Override
     public PatientEntityDTO getPatientEntityDTO(String uid) { // interface로 노출할 필요 존재
         return outport.getUserEntityDTO(uid);

@@ -22,6 +22,14 @@ public class PatientAdapter implements PatientOutport {
         return new PatientEntityDTO(getPatientEntity(id));
     }
 
+    @Override
+    public boolean enrollUrgentData(String id, String content) {
+        PatientEntity patient = getPatientEntity(id);
+        patient.setUrgentData(content);
+        this.patientRepository.save(patient);
+        return true;
+    }
+
     private PatientEntity getPatientEntity(String id) {
         return this.patientRepository.findByUserId(id);
     }

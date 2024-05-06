@@ -13,10 +13,13 @@ import java.util.List;
 @Getter
 @Setter
 @Entity(name = "Patient")
-@NoArgsConstructor
 public class PatientEntity {
     public PatientEntity(String userId){
+        this();
         this.userId = userId;
+    }
+
+    public PatientEntity() {
         this.createDate = LocalDateTime.now();
         this.lastEditDate = LocalDateTime.now();
     }
@@ -27,6 +30,9 @@ public class PatientEntity {
 
     @Column
     private String userId;
+
+    @Column
+    private String urgentData;
 
     @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<QuestionEntity> questions = new ArrayList<>();
