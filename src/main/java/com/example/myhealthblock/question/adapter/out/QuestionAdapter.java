@@ -12,6 +12,7 @@ import com.example.myhealthblock.question.adapter.out.personaldata.PersonalData;
 import com.example.myhealthblock.question.adapter.out.personaldata.PersonalDataEntity;
 import com.example.myhealthblock.question.adapter.out.personaldata.PersonalDataRepository;
 
+import com.example.myhealthblock.question.dto.QuestionEntityDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -55,6 +56,11 @@ public class QuestionAdapter implements QuestionOutport {
     @Override
     public QuestionDTO[] getMyQuestions(PatientEntity patient) {
         return getQuestionDTOs(this.questionRepository.findByPatient(patient));
+    }
+
+    @Override
+    public QuestionEntityDTO getQuestionEntityDTO(int id) {
+        return new QuestionEntityDTO(getQuestionEntity(id));
     }
 
     @Override

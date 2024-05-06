@@ -4,6 +4,7 @@ import com.example.myhealthblock.patient.adapter.out.PatientEntity;
 import com.example.myhealthblock.question.adapter.out.bodypart.BodyPart;
 import com.example.myhealthblock.question.dto.QuestionDTO;
 import com.example.myhealthblock.question.adapter.out.personaldata.PersonalData;
+import com.example.myhealthblock.question.dto.QuestionEntityDTO;
 
 import java.util.List;
 
@@ -15,4 +16,5 @@ public interface QuestionOutport {
     public QuestionDTO[] getQuestions();
 
     public QuestionDTO[] getMyQuestions(PatientEntity patient);
+    public QuestionEntityDTO getQuestionEntityDTO(int id);
 }

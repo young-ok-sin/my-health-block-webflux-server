@@ -21,5 +21,4 @@ public class QuestionDTO {
     String content;
     List<BodyPart> bodyParts;
     PersonalData personalData;
-
 }

@@ -14,11 +14,10 @@ public class OpinionAdapter implements OpinionOutport {
     private final OpinionRepository opinionRepository;
 
     @Override
-    public boolean create(int questionId, UserEntity user, String content) {
-        QuestionEntity question = new QuestionEntity(questionId);
+    public boolean create(QuestionEntity question, UserEntity user, String content) {
         OpinionEntity opinion = new OpinionEntity();
-        opinion.setUser(user);
         opinion.setContent(content);
+        opinion.setUser(user);
         opinion.setQuestion(question);
         opinionRepository.save(opinion);
         return true;
@@ -45,28 +44,26 @@ public class OpinionAdapter implements OpinionOutport {
 
     @Override
     public OpinionDTO[] getOpinions() {
-        List<OpinionEntity> opinions = opinionRepository.findAll();
-        return opinions.stream()
-                .map(this::mapToDTO)
-                .toArray(OpinionDTO[]::new);
+        return getOpinionDTOs(opinionRepository.findAll());
     }
 
     @Override
     public OpinionDTO[] getMyOpinions(UserEntity user) {
-        List<OpinionEntity> opinions = opinionRepository.findByUser(user);
+        return getOpinionDTOs(opinionRepository.findByUser(user));
+    }
+
+    private OpinionDTO[] getOpinionDTOs(List<OpinionEntity> opinions) {
         return opinions.stream()
                 .map(this::mapToDTO)
                 .toArray(OpinionDTO[]::new);
     }
 
     private OpinionDTO mapToDTO(OpinionEntity opinion) {
+        int id = opinion.getId();
         UserEntity user = opinion.getUser();
+        String content = opinion.getContent();
         QuestionEntity question = opinion.getQuestion();
-        return new OpinionDTO(
-                opinion.getId(),
-                user,
-                opinion.getContent(),
-                question
-        );
+
+        return new OpinionDTO(id, user, content, question);
     }
 }

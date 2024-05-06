@@ -2,7 +2,9 @@ package com.example.myhealthblock.user;
 
 
 import com.example.myhealthblock.user.adapter.out.UserAdapter;
+import com.example.myhealthblock.user.adapter.out.UserEntity;
 import com.example.myhealthblock.user.dto.ResultSignIn;
+import com.example.myhealthblock.user.dto.UserEntityDTO;
 import com.example.myhealthblock.user.dto.UserSignInDTO;
 import com.example.myhealthblock.user.dto.UserSignUpDTO;
 import org.springframework.stereotype.Service;
@@ -27,5 +29,9 @@ public class UserService {
             result.success(user.getRole(), user.getUid());
 
         return result;
+    }
+
+    public UserEntityDTO getUserEntityDTO(String userId) {
+        return outport.getUserEntityDTO(userId);
     }
 }
