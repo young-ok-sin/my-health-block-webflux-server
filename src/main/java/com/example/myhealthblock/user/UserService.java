@@ -26,7 +26,7 @@ public class UserService {
         ResultSignIn result = new ResultSignIn();
 
         if (user!=null && user.signIn(dto.getPw()))
-            result.success(user.getRole(), user.getId());
+            result.success(user.getRole(), user.getUid());
 
         return result;
     }

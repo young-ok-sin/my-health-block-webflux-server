@@ -22,6 +22,6 @@ public class UserAdapter implements UserOutport {
     public User getUser(String id) {
         UserEntity entity = this.userRepository.findByUserId(id);
 
-        return (entity != null) ? new User(entity.getUserId(), entity.getPw(), entity.getRole()) : null;
+        return (entity != null) ? new User(entity.getId(), entity.getUserId(), entity.getPw(), entity.getRole()) : null;
     }
 }
