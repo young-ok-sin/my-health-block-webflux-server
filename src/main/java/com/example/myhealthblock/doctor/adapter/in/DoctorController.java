@@ -29,7 +29,7 @@ public class DoctorController {
     @PostMapping("/v1/doctor/get-patient-urgent-data")
     public Map<String, String> getPatientUrgentData(@RequestBody RequestPatientUrgentDataDTO body) {
         Map<String, String> map = new HashMap<String, String>();
-        map.put("result", doctorService.getPatientUrgentData(body));
+        map.put("patientUrgentData", doctorService.getPatientUrgentData(body));
         return map;
     }
 }
