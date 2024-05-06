@@ -9,6 +9,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import lombok.RequiredArgsConstructor;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/api")
@@ -16,7 +19,9 @@ public class DoctorController {
     private final DoctorService doctorService;
 
     @PostMapping("/v1/doctor/sign-up")
-    public String signUp(@RequestBody DoctorSignUpDTO body) {
-        return doctorService.signUp(body);
+    public Map<String, String> signUp(@RequestBody DoctorSignUpDTO body) {
+        Map<String, String> map = new HashMap<String, String>();
+        map.put("result", doctorService.signUp(body));
+        return map;
     }
 }

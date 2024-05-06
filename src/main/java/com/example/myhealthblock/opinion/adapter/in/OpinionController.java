@@ -8,6 +8,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/api")
@@ -15,7 +18,9 @@ public class OpinionController {
     private final OpinionService opinionService;
 
     @PostMapping("/v1/opinion/enroll")
-    public String enroll(@RequestBody OpinionEnrollDTO body) {
-        return opinionService.enroll(body);
+    public Map<String, String> enroll(@RequestBody OpinionEnrollDTO body) {
+        Map<String, String> map = new HashMap<String, String>();
+        map.put("result", opinionService.enroll(body));
+        return map;
     }
 }

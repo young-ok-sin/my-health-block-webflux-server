@@ -17,8 +17,10 @@ public class QuestionController {
     private final QuestionService questionService;
 
     @PostMapping("/v1/question/enroll")
-    public String enroll(@RequestBody QuestionEnrollDTO body) {
-        return questionService.enroll(body);
+    public Map<String, String> enroll(@RequestBody QuestionEnrollDTO body) {
+        Map<String, String> map = new HashMap<String, String>();
+        map.put("result", questionService.enroll(body));
+        return map;
     }
 
     @GetMapping("/v1/question")
