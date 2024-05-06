@@ -1,4 +1,4 @@
-package com.example.myhealthblock.question;
+package com.example.myhealthblock.question.bodypart;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

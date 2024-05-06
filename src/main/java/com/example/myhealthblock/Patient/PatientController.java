@@ -1,5 +1,6 @@
 package com.example.myhealthblock.patient;
 
+import com.example.myhealthblock.patient.dto.PatientSignUpDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

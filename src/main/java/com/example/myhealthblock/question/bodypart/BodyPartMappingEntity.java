@@ -1,6 +1,7 @@
-package com.example.myhealthblock.question;
+package com.example.myhealthblock.question.bodypart;
 
 
+import com.example.myhealthblock.question.QuestionEntity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

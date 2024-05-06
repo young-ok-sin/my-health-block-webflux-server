@@ -1,4 +1,4 @@
-package com.example.myhealthblock.patient;
+package com.example.myhealthblock.patient.dto;
 
 import lombok.Getter;
 import lombok.Setter;

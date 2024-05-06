@@ -1,5 +1,7 @@
-package com.example.myhealthblock.question;
+package com.example.myhealthblock.question.personaldata;
 
+import com.example.myhealthblock.question.Gender;
+import com.example.myhealthblock.question.QuestionEntity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,6 +13,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Table(name="personalData")
 public class PersonalDataEntity {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -18,7 +21,6 @@ public class PersonalDataEntity {
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "question_id")
     private QuestionEntity question;
-
 
     private int age;
 

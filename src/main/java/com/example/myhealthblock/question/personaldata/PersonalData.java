@@ -1,5 +1,6 @@
-package com.example.myhealthblock.question;
+package com.example.myhealthblock.question.personaldata;
 
+import com.example.myhealthblock.question.Gender;
 import lombok.Getter;
 import lombok.Setter;
 

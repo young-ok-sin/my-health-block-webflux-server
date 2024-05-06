@@ -1,6 +1,6 @@
 package com.example.myhealthblock.question;
 
-import com.example.myhealthblock.Patient.PatientEntity;
+import com.example.myhealthblock.patient.PatientEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

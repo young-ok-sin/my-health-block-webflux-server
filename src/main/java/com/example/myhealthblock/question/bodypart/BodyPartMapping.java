@@ -1,5 +1,6 @@
-package com.example.myhealthblock.question;
+package com.example.myhealthblock.question.bodypart;
 
+import com.example.myhealthblock.question.QuestionEntity;
 import lombok.Getter;
 import lombok.Setter;
 

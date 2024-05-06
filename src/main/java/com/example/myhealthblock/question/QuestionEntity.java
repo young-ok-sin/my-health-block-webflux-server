@@ -1,7 +1,8 @@
 package com.example.myhealthblock.question;
 
-import com.example.myhealthblock.Patient.PatientEntity;
+import com.example.myhealthblock.patient.PatientEntity;
 import com.example.myhealthblock.opinion.OpinionEntity;
+import com.example.myhealthblock.question.bodypart.BodyPartMappingEntity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -17,8 +18,8 @@ import java.util.List;
 @Entity(name = "Question")
 @NoArgsConstructor
 public class QuestionEntity {
-    public QuestionEntity(String userId, String title, Category category, String symptom, String content){
-        this.patient = new PatientEntity(userId);
+    public QuestionEntity(PatientEntity patient, String title, Category category, String symptom, String content){
+        this.patient = patient;
         this.title = title;
         this.category = category;
         this.symptom = symptom;
@@ -39,6 +40,7 @@ public class QuestionEntity {
     private Category category;
 
     private String symptom;
+
     private String content;
     @CreatedDate
     private LocalDateTime createDate;
