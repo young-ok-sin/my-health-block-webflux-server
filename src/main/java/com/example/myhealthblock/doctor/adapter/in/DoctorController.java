@@ -2,6 +2,7 @@ package com.example.myhealthblock.doctor.adapter.in;
 
 import com.example.myhealthblock.doctor.DoctorService;
 import com.example.myhealthblock.doctor.dto.DoctorSignUpDTO;
+import com.example.myhealthblock.doctor.dto.RequestPatientUrgentDataDTO;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,6 +23,13 @@ public class DoctorController {
     public Map<String, String> signUp(@RequestBody DoctorSignUpDTO body) {
         Map<String, String> map = new HashMap<String, String>();
         map.put("result", doctorService.signUp(body));
+        return map;
+    }
+
+    @PostMapping("/v1/doctor/get-patient-urgent-data")
+    public Map<String, String> getPatientUrgentData(@RequestBody RequestPatientUrgentDataDTO body) {
+        Map<String, String> map = new HashMap<String, String>();
+        map.put("result", doctorService.getPatientUrgentData(body));
         return map;
     }
 }

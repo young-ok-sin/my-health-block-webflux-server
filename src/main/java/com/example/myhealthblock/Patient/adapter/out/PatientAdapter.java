@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class PatientAdapter implements PatientOutport {
     private final PatientRepository patientRepository;
+    private final UrgentDataSearchHistoryRepository urgentDataSearchHistoryRepository;
+
     @Override
     public boolean create(String id) {
         PatientEntity p = new PatientEntity(id);
@@ -28,6 +30,19 @@ public class PatientAdapter implements PatientOutport {
         patient.setUrgentData(content);
         this.patientRepository.save(patient);
         return true;
+    }
+
+    @Override
+    public String getUrgentData(String id, String reason, String doctorId) {
+        String data = getPatientEntity(id).getUrgentData();
+        UrgentDataSearchHistoryEntity history = new UrgentDataSearchHistoryEntity();
+        history.setDoctorId(doctorId);
+        history.setContent(data);
+        history.setReason(reason);
+        history.setDoctorId(doctorId);
+        urgentDataSearchHistoryRepository.save(history);
+
+        return data;
     }
 
     private PatientEntity getPatientEntity(String id) {
