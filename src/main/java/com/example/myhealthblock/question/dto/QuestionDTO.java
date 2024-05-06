@@ -1,8 +1,8 @@
 package com.example.myhealthblock.question.dto;
 
-import com.example.myhealthblock.question.bodypart.BodyPart;
+import com.example.myhealthblock.question.adapter.out.bodypart.BodyPart;
 import com.example.myhealthblock.question.Category;
-import com.example.myhealthblock.question.personaldata.PersonalData;
+import com.example.myhealthblock.question.adapter.out.personaldata.PersonalData;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;

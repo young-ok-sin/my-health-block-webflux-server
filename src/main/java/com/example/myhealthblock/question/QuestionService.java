@@ -2,6 +2,7 @@ package com.example.myhealthblock.question;
 
 import com.example.myhealthblock.patient.PatientService;
 import com.example.myhealthblock.patient.dto.PatientEntityDTO;
+import com.example.myhealthblock.question.adapter.out.QuestionAdapter;
 import com.example.myhealthblock.question.dto.QuestionEnrollDTO;
 import org.springframework.stereotype.Service;
 import lombok.RequiredArgsConstructor;

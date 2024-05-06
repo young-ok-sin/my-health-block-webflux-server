@@ -1,14 +1,12 @@
 package com.example.myhealthblock.user;
 
 
+import com.example.myhealthblock.user.adapter.out.UserAdapter;
 import com.example.myhealthblock.user.dto.ResultSignIn;
 import com.example.myhealthblock.user.dto.UserSignInDTO;
 import com.example.myhealthblock.user.dto.UserSignUpDTO;
 import org.springframework.stereotype.Service;
 import lombok.RequiredArgsConstructor;
-
-import java.util.HashMap;
-import java.util.Map;
 
 
 @RequiredArgsConstructor

@@ -1,5 +1,6 @@
 package com.example.myhealthblock.doctor;
 
+import com.example.myhealthblock.doctor.adapter.out.DoctorAdapter;
 import com.example.myhealthblock.doctor.dto.DoctorSignUpDTO;
 import com.example.myhealthblock.user.dto.UserSignUpDTO;
 import com.example.myhealthblock.user.UserService;

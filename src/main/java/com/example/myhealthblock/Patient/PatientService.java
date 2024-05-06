@@ -1,7 +1,8 @@
 package com.example.myhealthblock.patient;
 
+import com.example.myhealthblock.patient.adapter.out.PatientAdapter;
+import com.example.myhealthblock.patient.adapter.out.PatientEntity;
 import com.example.myhealthblock.patient.dto.*;
-import com.example.myhealthblock.patient.PatientEntity;
 import com.example.myhealthblock.patient.dto.PatientEntityDTO;
 import com.example.myhealthblock.user.UserService;
 import com.example.myhealthblock.user.dto.UserSignUpDTO;

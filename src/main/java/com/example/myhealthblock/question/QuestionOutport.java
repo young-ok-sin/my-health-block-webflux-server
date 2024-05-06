@@ -1,9 +1,9 @@
 package com.example.myhealthblock.question;
 
-import com.example.myhealthblock.patient.PatientEntity;
-import com.example.myhealthblock.question.bodypart.BodyPart;
+import com.example.myhealthblock.patient.adapter.out.PatientEntity;
+import com.example.myhealthblock.question.adapter.out.bodypart.BodyPart;
 import com.example.myhealthblock.question.dto.QuestionDTO;
-import com.example.myhealthblock.question.personaldata.PersonalData;
+import com.example.myhealthblock.question.adapter.out.personaldata.PersonalData;
 
 import java.util.List;
 

@@ -1,7 +1,7 @@
 package com.example.myhealthblock.opinion.dto;
 
-import com.example.myhealthblock.question.QuestionEntity;
-import com.example.myhealthblock.user.UserEntity;
+import com.example.myhealthblock.question.adapter.out.QuestionEntity;
+import com.example.myhealthblock.user.adapter.out.UserEntity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
