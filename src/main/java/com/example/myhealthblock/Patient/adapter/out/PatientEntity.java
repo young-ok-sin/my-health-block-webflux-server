@@ -17,7 +17,10 @@ import java.util.List;
 public class PatientEntity {
     public PatientEntity(String userId){
         this.userId = userId;
+        this.createDate = LocalDateTime.now();
+        this.lastEditDate = LocalDateTime.now();
     }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;

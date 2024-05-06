@@ -31,12 +31,6 @@ public class DoctorEntity {
     String userId;
 
     @Column(length = 200)
-    String pw;
-
-    @Column(length = 200)
-    String role;
-
-    @Column(length = 200)
     String name;
 
     @Column(length = 200)
@@ -48,7 +42,9 @@ public class DoctorEntity {
     @Column(length = 200)
     String introduction;
 
+    @Column
     private LocalDateTime createDate;
 
+    @Column
     private LocalDateTime lastEditDate;
 }

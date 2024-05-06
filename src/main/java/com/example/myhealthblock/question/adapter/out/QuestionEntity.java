@@ -25,6 +25,7 @@ public class QuestionEntity {
         this.category = category;
         this.symptom = symptom;
         this.content = content;
+        createDate = LocalDateTime.now();
     }
 
     @Id
