@@ -29,6 +29,6 @@ public class PatientService {
     }
 
     public PatientEntityDTO getPatientEntityDTO(String uid) { // interface로 노출할 필요 존재
-        return new PatientEntityDTO(new PatientEntity());
+        return outport.getUserEntityDTO(uid);
     }
 }

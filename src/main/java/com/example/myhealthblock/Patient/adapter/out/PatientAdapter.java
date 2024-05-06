@@ -1,6 +1,7 @@
 package com.example.myhealthblock.patient.adapter.out;
 
 import com.example.myhealthblock.patient.PatientOutport;
+import com.example.myhealthblock.patient.dto.PatientEntityDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -14,5 +15,14 @@ public class PatientAdapter implements PatientOutport {
         this.patientRepository.save(p);
 
         return true;
+    }
+
+    @Override
+    public PatientEntityDTO getUserEntityDTO(String id) {
+        return new PatientEntityDTO(getPatientEntity(id));
+    }
+
+    private PatientEntity getPatientEntity(String id) {
+        return this.patientRepository.findByUserId(id);
     }
 }
