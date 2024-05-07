@@ -19,7 +19,7 @@ public class QuestionService {
 
     public String enroll(QuestionEnrollDTO dto) {
         PatientEntityDTO patientDto = patientInport.getPatientEntityDTO(dto.getUserId());
-        boolean result = outport.create(patientDto.getEntity(), dto.getTitle(), dto.getCategory(), dto.getSymptom(), dto.getContent(), dto.getBodyParts(), null);
+        boolean result = outport.create(patientDto.getEntity(), dto.getTitle(), dto.getCategory(), dto.getSymptom(), dto.getContent(), dto.getBodyParts(), dto.getPersonalData());
 
         return result ? "success" : "fail";
     }

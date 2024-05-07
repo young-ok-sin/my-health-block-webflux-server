@@ -7,8 +7,8 @@ import com.example.myhealthblock.question.QuestionOutport;
 import com.example.myhealthblock.question.adapter.out.bodypart.BodyMappingRepository;
 import com.example.myhealthblock.question.adapter.out.bodypart.BodyPart;
 import com.example.myhealthblock.question.adapter.out.bodypart.BodyPartMappingEntity;
+import com.example.myhealthblock.question.dto.PersonalDataDTO;
 import com.example.myhealthblock.question.dto.QuestionDTO;
-import com.example.myhealthblock.question.adapter.out.personaldata.PersonalData;
 import com.example.myhealthblock.question.adapter.out.personaldata.PersonalDataEntity;
 import com.example.myhealthblock.question.adapter.out.personaldata.PersonalDataRepository;
 
@@ -28,7 +28,7 @@ public class QuestionAdapter implements QuestionOutport {
     private final BodyMappingRepository bodyMappingRepository;
 
     @Override
-    public boolean create(PatientEntity patient, String title, Category category, String symptom, String content, List<BodyPart> bodyParts, PersonalData personalData) {
+    public boolean create(PatientEntity patient, String title, Category category, String symptom, String content, List<BodyPart> bodyParts, PersonalDataDTO personalData) {
         QuestionEntity question = new QuestionEntity(patient, title, category, symptom, content);
         questionRepository.save(question);
 
@@ -86,13 +86,13 @@ public class QuestionAdapter implements QuestionOutport {
         }
     }
 
-    private void insertPersonalData(QuestionEntity question, PersonalData personalData) {
+    private void insertPersonalData(QuestionEntity question, PersonalDataDTO personalData) {
         if (personalData != null) {
             personalDataRepository.save(getPersonalDataEntity(question, personalData));
         }
     }
 
-    private PersonalDataEntity getPersonalDataEntity(QuestionEntity question, PersonalData personalData) {
+    private PersonalDataEntity getPersonalDataEntity(QuestionEntity question, PersonalDataDTO personalData) {
         PersonalDataEntity personalDataEntity = new PersonalDataEntity();
         personalDataEntity.setQuestion(question);
         personalDataEntity.setAge(personalData.getAge());
@@ -114,7 +114,7 @@ public class QuestionAdapter implements QuestionOutport {
     }
 
     private QuestionDTO getQuestionDTO(QuestionEntity questionEntity) {
-        PersonalData personalData = getPersonalData(personalDataRepository.findByQuestion(questionEntity));
+        PersonalDataDTO personalData = getPersonalDataDTO(personalDataRepository.findByQuestion(questionEntity));
         List<BodyPart> bodyParts = getBodyParts(questionEntity);
 
         return new QuestionDTO(
@@ -129,12 +129,12 @@ public class QuestionAdapter implements QuestionOutport {
         );
     }
 
-    private PersonalData getPersonalData(PersonalDataEntity personalDataEntity) {
+    private PersonalDataDTO getPersonalDataDTO(PersonalDataEntity personalDataEntity) {
         if (personalDataEntity == null) {
             return null;
         }
 
-        PersonalData personalData = new PersonalData();
+        PersonalDataDTO personalData = new PersonalDataDTO();
 
         personalData.setAge(personalDataEntity.getAge());
         personalData.setGender(personalDataEntity.getGender());

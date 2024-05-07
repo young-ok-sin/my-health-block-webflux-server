@@ -2,7 +2,6 @@ package com.example.myhealthblock.question.dto;
 
 import com.example.myhealthblock.question.adapter.out.bodypart.BodyPart;
 import com.example.myhealthblock.question.Category;
-import com.example.myhealthblock.question.adapter.out.personaldata.PersonalData;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -20,5 +19,5 @@ public class QuestionDTO {
     String symptom;
     String content;
     List<BodyPart> bodyParts;
-    PersonalData personalData;
+    PersonalDataDTO personalData;
 }
