@@ -1,5 +1,7 @@
 package com.example.myhealthblock.patient.adapter.in;
 
+import com.example.myhealthblock.aop.LogExecutionTime;
+import com.example.myhealthblock.aop.LogTarget;
 import com.example.myhealthblock.patient.PatientService;
 import com.example.myhealthblock.patient.dto.PatientEnrollUrgentDataDTO;
 import com.example.myhealthblock.patient.dto.PatientGetUrgentDataDTO;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.HashMap;
 import java.util.Map;
 
+@LogExecutionTime(logTarget = LogTarget.CONTROLLER)
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/api")

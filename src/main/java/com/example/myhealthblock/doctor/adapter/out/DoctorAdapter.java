@@ -1,9 +1,12 @@
 package com.example.myhealthblock.doctor.adapter.out;
 
+import com.example.myhealthblock.aop.LogExecutionTime;
+import com.example.myhealthblock.aop.LogTarget;
 import com.example.myhealthblock.doctor.DoctorOutport;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+@LogExecutionTime(logTarget = LogTarget.ADAPTER)
 @RequiredArgsConstructor
 @Service
 public class DoctorAdapter implements DoctorOutport {

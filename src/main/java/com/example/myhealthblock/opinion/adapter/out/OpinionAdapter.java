@@ -1,5 +1,7 @@
 package com.example.myhealthblock.opinion.adapter.out;
 
+import com.example.myhealthblock.aop.LogExecutionTime;
+import com.example.myhealthblock.aop.LogTarget;
 import com.example.myhealthblock.opinion.OpinionOutport;
 import com.example.myhealthblock.opinion.dto.OpinionDTO;
 import com.example.myhealthblock.question.adapter.out.QuestionEntity;
@@ -8,6 +10,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+
+@LogExecutionTime(logTarget = LogTarget.ADAPTER)
 @RequiredArgsConstructor
 @Service
 public class OpinionAdapter implements OpinionOutport {

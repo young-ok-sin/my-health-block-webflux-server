@@ -1,5 +1,7 @@
 package com.example.myhealthblock.question.adapter.out;
 
+import com.example.myhealthblock.aop.LogExecutionTime;
+import com.example.myhealthblock.aop.LogTarget;
 import com.example.myhealthblock.patient.adapter.out.PatientEntity;
 import com.example.myhealthblock.patient.adapter.out.PatientRepository;
 import com.example.myhealthblock.question.Category;
@@ -19,6 +21,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@LogExecutionTime(logTarget = LogTarget.ADAPTER)
 @RequiredArgsConstructor
 @Service
 public class QuestionAdapter implements QuestionOutport {

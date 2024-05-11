@@ -1,5 +1,7 @@
 package com.example.myhealthblock.question.adapter.in;
 
+import com.example.myhealthblock.aop.LogExecutionTime;
+import com.example.myhealthblock.aop.LogTarget;
 import com.example.myhealthblock.question.QuestionService;
 import org.springframework.web.bind.annotation.*;
 
@@ -10,6 +12,7 @@ import lombok.RequiredArgsConstructor;
 import java.util.HashMap;
 import java.util.Map;
 
+@LogExecutionTime(logTarget = LogTarget.CONTROLLER)
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/api")

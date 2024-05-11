@@ -1,5 +1,7 @@
 package com.example.myhealthblock.user.adapter.in;
 
+import com.example.myhealthblock.aop.LogExecutionTime;
+import com.example.myhealthblock.aop.LogTarget;
 import com.example.myhealthblock.user.UserService;
 import com.example.myhealthblock.user.dto.UserSignInDTO;
 import com.example.myhealthblock.user.dto.UserSignUpDTO;
@@ -12,6 +14,7 @@ import lombok.RequiredArgsConstructor;
 
 import java.util.Map;
 
+@LogExecutionTime(logTarget = LogTarget.CONTROLLER)
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/api")
