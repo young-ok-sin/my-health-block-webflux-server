@@ -1,5 +1,5 @@
 src/main/java/com/example/myhealthblock/api/healthdata/specific
-logs
+logs/*
 
 HELP.md
 .gradle
