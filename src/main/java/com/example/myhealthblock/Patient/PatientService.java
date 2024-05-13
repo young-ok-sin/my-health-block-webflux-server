@@ -1,10 +1,12 @@
 package com.example.myhealthblock.patient;
 
+import com.example.myhealthblock.patient.adapter.in.request.RequestPatientEnrollUrgentData;
+import com.example.myhealthblock.patient.adapter.in.request.RequestPatientGetUrgentData;
+import com.example.myhealthblock.patient.adapter.in.request.RequestPatientSignUp;
 import com.example.myhealthblock.patient.adapter.out.PatientAdapter;
-import com.example.myhealthblock.patient.dto.*;
 import com.example.myhealthblock.patient.dto.PatientEntityDTO;
 import com.example.myhealthblock.user.UserService;
-import com.example.myhealthblock.user.dto.UserSignUpDTO;
+import com.example.myhealthblock.user.adapter.in.request.RequestUserSignUp;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -14,8 +16,8 @@ public class PatientService implements GetPatientEntityDTO, GetPatientUrgentData
     private final PatientAdapter outport;
     private final UserService userInport;
 
-    public String signUp(PatientSignUpDTO dto){
-        UserSignUpDTO user = new UserSignUpDTO();
+    public String signUp(RequestPatientSignUp dto){
+        RequestUserSignUp user = new RequestUserSignUp();
         user.setId(dto.getId());
         user.setPw(dto.getPw());
         user.setRole(dto.getRole());
@@ -27,12 +29,12 @@ public class PatientService implements GetPatientEntityDTO, GetPatientUrgentData
         return result ? "success" : "fail";
     }
 
-    public String enrollUrgentData(PatientEnrollUrgentDataDTO dto){
+    public String enrollUrgentData(RequestPatientEnrollUrgentData dto){
         boolean result = outport.enrollUrgentData(dto.getId(), dto.getContent());
         return result ? "success" : "fail";
     }
 
-    public String getMyUrgentData(PatientGetUrgentDataDTO dto){
+    public String getMyUrgentData(RequestPatientGetUrgentData dto){
         return outport.getUrgentData(dto.getId());
     }
     @Override

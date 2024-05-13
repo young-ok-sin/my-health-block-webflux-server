@@ -1,4 +1,4 @@
-package com.example.myhealthblock.opinion.dto;
+package com.example.myhealthblock.opinion.adapter.in.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,7 +9,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class OpinionEnrollDTO {
+public class RequestOpinionEnroll {
     String userId;
     String content;
     Integer questionId;

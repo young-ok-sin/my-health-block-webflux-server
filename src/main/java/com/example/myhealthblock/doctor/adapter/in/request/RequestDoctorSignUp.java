@@ -1,11 +1,11 @@
-package com.example.myhealthblock.doctor.dto;
+package com.example.myhealthblock.doctor.adapter.in.request;
 
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-public class DoctorSignUpDTO {
+public class RequestDoctorSignUp {
     String id;
     String pw;
     String role;

@@ -1,7 +1,7 @@
 package com.example.myhealthblock.opinion;
 
 import com.example.myhealthblock.opinion.adapter.out.OpinionAdapter;
-import com.example.myhealthblock.opinion.dto.OpinionEnrollDTO;
+import com.example.myhealthblock.opinion.adapter.in.request.RequestOpinionEnroll;
 import com.example.myhealthblock.question.QuestionService;
 import com.example.myhealthblock.question.dto.QuestionEntityDTO;
 import com.example.myhealthblock.user.UserService;
@@ -18,7 +18,7 @@ public class OpinionService {
     //    private final GetQuestionEntityDTO questionInport; DI 컨테이너 학습 후 적용
     //    private final GetUserEntityDTO userInport; DI 컨테이너 학습 후 적용
 
-    public String enroll(OpinionEnrollDTO dto) {
+    public String enroll(RequestOpinionEnroll dto) {
         QuestionEntityDTO questionDto = questionInport.getQuestionEntityDTO(dto.getQuestionId());
         UserEntityDTO userDto = userInport.getUserEntityDTO(dto.getUserId());
         boolean result = outport.create(questionDto.getEntity(), userDto.getEntity(), dto.getContent());

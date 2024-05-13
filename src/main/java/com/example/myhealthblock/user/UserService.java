@@ -2,11 +2,10 @@ package com.example.myhealthblock.user;
 
 
 import com.example.myhealthblock.user.adapter.out.UserAdapter;
-import com.example.myhealthblock.user.adapter.out.UserEntity;
 import com.example.myhealthblock.user.dto.ResultSignIn;
 import com.example.myhealthblock.user.dto.UserEntityDTO;
-import com.example.myhealthblock.user.dto.UserSignInDTO;
-import com.example.myhealthblock.user.dto.UserSignUpDTO;
+import com.example.myhealthblock.user.adapter.in.request.RequestUserSignIn;
+import com.example.myhealthblock.user.adapter.in.request.RequestUserSignUp;
 import org.springframework.stereotype.Service;
 import lombok.RequiredArgsConstructor;
 
@@ -16,12 +15,12 @@ import lombok.RequiredArgsConstructor;
 public class UserService implements GetUserEntityDTO{
     private final UserAdapter outport;
 
-    public String signUp(UserSignUpDTO dto) {
+    public String signUp(RequestUserSignUp dto) {
         return outport.create(dto.getId(), dto.getPw(), dto.getRole()) ? "success" : "fail";
     }
 
 
-    public ResultSignIn signIn(UserSignInDTO dto) {
+    public ResultSignIn signIn(RequestUserSignIn dto) {
         User user = outport.getUser(dto.getId());
         ResultSignIn result = new ResultSignIn();
 

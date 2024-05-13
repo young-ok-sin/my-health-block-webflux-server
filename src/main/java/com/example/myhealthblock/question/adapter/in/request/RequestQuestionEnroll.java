@@ -1,7 +1,8 @@
-package com.example.myhealthblock.question.dto;
+package com.example.myhealthblock.question.adapter.in.request;
 
 import com.example.myhealthblock.question.adapter.out.bodypart.BodyPart;
 import com.example.myhealthblock.question.Category;
+import com.example.myhealthblock.question.dto.PersonalDataDTO;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,7 +14,7 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class QuestionEnrollDTO {
+public class RequestQuestionEnroll {
     String userId;
     List<BodyPart> bodyParts;
     Category category;

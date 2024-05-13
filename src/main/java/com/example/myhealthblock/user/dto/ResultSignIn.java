@@ -1,5 +1,7 @@
 package com.example.myhealthblock.user.dto;
 
+import com.example.myhealthblock.user.adapter.in.response.ResponseSignIn;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -18,7 +20,11 @@ public class ResultSignIn {
         response.put("id", id);
     }
 
-    public Map<String, String> getRequestBody() {
-        return new HashMap<>(response);
+    public ResponseSignIn getRequestBody() {
+        ResponseSignIn response = new ResponseSignIn();
+        response.setResult(this.response.get("result"));
+        response.setRole(this.response.get("role"));
+        response.setId(this.response.get("id"));
+        return response;
     }
 }
