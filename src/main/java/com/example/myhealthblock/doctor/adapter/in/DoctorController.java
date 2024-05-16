@@ -5,12 +5,10 @@ import com.example.myhealthblock.aop.LogTarget;
 import com.example.myhealthblock.doctor.DoctorService;
 import com.example.myhealthblock.doctor.adapter.in.request.RequestDoctorSignUp;
 import com.example.myhealthblock.doctor.adapter.in.request.RequestPatientUrgentData;
+import com.example.myhealthblock.doctor.adapter.in.response.ResponseDoctorData;
 import com.example.myhealthblock.doctor.adapter.in.response.ResponsePatientUrgentData;
 import com.example.myhealthblock.doctor.adapter.in.response.ResponseResult;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.*;
 
 import lombok.RequiredArgsConstructor;
 
@@ -33,5 +31,15 @@ public class DoctorController {
         ResponsePatientUrgentData response = new ResponsePatientUrgentData();
         response.setPatientUrgentData(doctorService.getPatientUrgentData(body));
         return response;
+    }
+
+    @DeleteMapping("/test-0/doctor/{id}")
+    public ResponseResult delete(@PathVariable String id) {
+        return new ResponseResult();
+    }
+
+    @GetMapping("/test-0/doctor/{id}")
+    public ResponseDoctorData update(@PathVariable String id) {
+        return new ResponseDoctorData();
     }
 }
