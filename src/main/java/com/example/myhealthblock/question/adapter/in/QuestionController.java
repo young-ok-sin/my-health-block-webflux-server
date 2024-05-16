@@ -2,6 +2,7 @@ package com.example.myhealthblock.question.adapter.in;
 
 import com.example.myhealthblock.aop.LogExecutionTime;
 import com.example.myhealthblock.aop.LogTarget;
+import com.example.myhealthblock.question.Category;
 import com.example.myhealthblock.question.QuestionService;
 import com.example.myhealthblock.question.adapter.in.request.RequestQuestionEnroll;
 import com.example.myhealthblock.question.adapter.in.request.RequestQuestionUpdate;
@@ -44,8 +45,11 @@ public class QuestionController {
         return new ResponseResult();
     }
 
-    @GetMapping("/test-0/question/list/{userId}")
-    public ResponseQuestionList getTitles(@PathVariable(required = false) String userId) {
+    @GetMapping("/test-1/question/list")
+    public ResponseQuestionList getTitles(
+            @RequestParam Category category,
+            @RequestParam(required = false) String userId
+    ) {
         if (userId != null) {
 //            특정 인물의 질문 리스트 조회
         } else {
