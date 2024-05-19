@@ -1,9 +1,9 @@
 package com.example.myhealthblock.api.healthdata;
 
-import com.example.myhealthblock.api.healthdata.dto.HealthCheckupFirstRequestDTO;
-import com.example.myhealthblock.api.healthdata.dto.MedicalHistoryFirstRequestDTO;
-import com.example.myhealthblock.api.healthdata.dto.SecondRequestDTO;
-import com.example.myhealthblock.api.healthdata.dto.TreatmentInfoFirstRequestDTO;
+import com.example.myhealthblock.api.healthdata.dto.*;
+import com.example.myhealthblock.api.healthdata.specific.RealApi;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.springframework.stereotype.Service;
 import lombok.RequiredArgsConstructor;
 
@@ -16,24 +16,23 @@ public class ApiService {
         return apiOutport.requestMedicalHistory(dto.getHashMap());
     }
 
-    public String requestTreatmentImformation(TreatmentInfoFirstRequestDTO dto) {
-        return apiOutport.requestTreatmentImformation(dto.getHashMap());
+    public String requestTreatmentInformation(TreatmentInfoFirstRequestDTO dto) {
+        return apiOutport.requestTreatmentInformation(dto.getHashMap());
     }
-
 
     public String requestHealthCheckupResult(HealthCheckupFirstRequestDTO dto) {
         return apiOutport.requestHealthCheckupResult(dto.getHashMap());
     }
 
-    public String requestMedicalHistorySecond(SecondRequestDTO dto) {
+    public String requestMedicalHistorySecond(MedicalHistorySecondRequestDTO dto) {
         return apiOutport.requestMedicalHistorySecond(dto.getHashMap());
     }
 
-    public String requestTreatmentImformationSecond(SecondRequestDTO dto) {
-        return apiOutport.requestTreatmentImformationSecond(dto.getHashMap());
+    public String requestTreatmentInformationSecond(TreatmentInfoSecondRequestDTO dto) {
+        return apiOutport.requestTreatmentInformationSecond(dto.getHashMap());
     }
 
-    public String requestHealthCheckupResultSecond(SecondRequestDTO dto) {
+    public String requestHealthCheckupResultSecond(HealthCheckupSecondRequestDTO dto) {
         return apiOutport.requestHealthCheckupResultSecond(dto.getHashMap());
     }
 }
