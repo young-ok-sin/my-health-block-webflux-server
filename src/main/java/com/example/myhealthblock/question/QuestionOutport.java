@@ -17,4 +17,5 @@ public interface QuestionOutport {
 
     public QuestionDTO[] getMyQuestions(PatientEntity patient);
     public QuestionEntityDTO getQuestionEntityDTO(int id);
+    public boolean update(Integer questionId, String title, String symptom, String content);
 }

@@ -68,6 +68,17 @@ public class QuestionAdapter implements QuestionOutport {
     }
 
     @Override
+    public boolean update(Integer questionId, String title, String symptom, String content) {
+        QuestionEntity question = getQuestionEntity(questionId);
+        question.setTitle(title);
+        question.setSymptom(symptom);
+        question.setContent(content);
+        questionRepository.save(question);
+
+        return true;
+    }
+
+    @Override
     public boolean delete(int id) {
         QuestionEntity questionEntity = getQuestionEntity(id);
         if (questionEntity == null) {

@@ -43,7 +43,7 @@ public class QuestionController {
     @Operation(summary = "질문 수정", description = "특정 데이터만 수정")
     @PatchMapping("/test-0/question")
     public ResponseResult update(@RequestBody RequestQuestionUpdate body) {
-        return new ResponseResult();
+        return new ResponseResult(questionService.update(body.getQuestionId(), body.getTitle(), body.getSymptom(), body.getContent()));
     }
 
     @Operation(summary = "질문 삭제", description = "질문 삭제 <br>{questionId}는 식별자")
