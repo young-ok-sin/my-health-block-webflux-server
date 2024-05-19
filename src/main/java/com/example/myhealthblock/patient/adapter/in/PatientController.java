@@ -46,13 +46,13 @@ public class PatientController {
 
     @Operation(summary = "긴급 데이터 삭제", description = "긴급 데이터 삭제 <br>{patientId}는 회원가입 아이디")
     @DeleteMapping("/test-0/patient/urgent-data/{patientId}")
-    public ResponseResult deleteUrgentData(@PathVariable String id){
-        return new ResponseResult();
+    public ResponseResult deleteUrgentData(@PathVariable String patientId){
+        return new ResponseResult(patientService.deleteUrgentData(patientId));
     }
 
     @Operation(summary = "긴급 데이터 열람 기록 조회", description = "의료진이 긴급 데이터 열람한 기록 조회 <br>{patientId}는 회원가입 아이디")
     @GetMapping("/test-0/patient/{patientId}/urgent-data-view-history")
-    public ResponsePatientUrgentDataViewHistory getViewHistory(@PathVariable String id) {
-        return new ResponsePatientUrgentDataViewHistory();
+    public ResponsePatientUrgentDataViewHistory getViewHistory(@PathVariable String patientId) {
+        return new ResponsePatientUrgentDataViewHistory(patientService.getViewHistory(patientId));
     }
 }

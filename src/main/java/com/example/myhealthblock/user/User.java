@@ -16,4 +16,12 @@ public class User {
     public boolean signIn(String pw) {
         return this.pw.equals(pw);
     }
+
+    public boolean changePw(String oldPw, String newPw) {
+        if (pw.equals(oldPw)) {
+            pw = newPw;
+            return true;
+        }
+        return false;
+    }
 }

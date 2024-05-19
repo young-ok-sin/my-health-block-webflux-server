@@ -3,6 +3,7 @@ package com.example.myhealthblock.doctor;
 import com.example.myhealthblock.doctor.adapter.out.DoctorAdapter;
 import com.example.myhealthblock.doctor.adapter.in.request.RequestDoctorSignUp;
 import com.example.myhealthblock.doctor.adapter.in.request.RequestPatientUrgentData;
+import com.example.myhealthblock.doctor.dto.DoctorProfileDTO;
 import com.example.myhealthblock.patient.PatientService;
 import com.example.myhealthblock.user.adapter.in.request.RequestUserSignUp;
 import com.example.myhealthblock.user.UserService;
@@ -29,5 +30,14 @@ public class DoctorService {
 
     public String getPatientUrgentData(RequestPatientUrgentData dto) {
         return patientInport.getUrgentData(dto.getPatientId(), dto.getReason(), dto.getDoctorId());
+    }
+
+    public String deleteData(String doctorId) {
+        boolean result = outport.deleteData(doctorId);
+        return result ? "success" : "fail";
+    }
+
+    public DoctorProfileDTO getDoctorProfile(String doctorId) {
+        return outport.getDoctorProfile(doctorId);
     }
 }

@@ -30,4 +30,9 @@ public class QuestionService {
     public QuestionEntityDTO getQuestionEntityDTO(int questionId) { // inport interface로 노출할 필요 존재
         return outport.getQuestionEntityDTO(questionId);
     }
+
+    public String update(Integer questionId, String title, String symptom, String content) {
+        boolean result = outport.update(questionId, title, symptom, content);
+        return result ? "success" : "fail";
+    }
 }

@@ -1,21 +1,17 @@
 package com.example.myhealthblock.patient.adapter.in.response;
 
+import com.example.myhealthblock.patient.dto.PatientUrgentDataViewDTO;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import java.time.LocalDateTime;
 
 @Getter
 @Setter
+@NoArgsConstructor
 public class ResponsePatientUrgentDataViewHistory {
-    private PatientUrgentDataView[] history;
+    private PatientUrgentDataViewDTO[] history;
 
-    @Getter
-    @Setter
-    public static class PatientUrgentDataView {
-        private String doctorId;
-        private String reason;
-        private LocalDateTime date;
-        private String content;
+    public ResponsePatientUrgentDataViewHistory(PatientUrgentDataViewDTO[] history) {
+        this.history = history;
     }
 }
