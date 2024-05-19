@@ -5,6 +5,7 @@ import com.example.myhealthblock.patient.adapter.in.request.RequestPatientGetUrg
 import com.example.myhealthblock.patient.adapter.in.request.RequestPatientSignUp;
 import com.example.myhealthblock.patient.adapter.out.PatientAdapter;
 import com.example.myhealthblock.patient.dto.PatientEntityDTO;
+import com.example.myhealthblock.patient.dto.PatientUrgentDataViewDTO;
 import com.example.myhealthblock.user.UserService;
 import com.example.myhealthblock.user.adapter.in.request.RequestUserSignUp;
 import lombok.RequiredArgsConstructor;
@@ -45,6 +46,10 @@ public class PatientService implements GetPatientEntityDTO, GetPatientUrgentData
     public String deleteUrgentData(String patientId) {
         boolean result = outport.deleteUrgentData(patientId);
         return result ? "success" : "fail";
+    }
+
+    public PatientUrgentDataViewDTO[] getViewHistory(String patientId) {
+        return outport.getViewHistory(patientId);
     }
 
     @Override

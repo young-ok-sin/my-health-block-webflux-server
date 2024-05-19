@@ -52,7 +52,7 @@ public class PatientController {
 
     @Operation(summary = "긴급 데이터 열람 기록 조회", description = "의료진이 긴급 데이터 열람한 기록 조회 <br>{patientId}는 회원가입 아이디")
     @GetMapping("/test-0/patient/{patientId}/urgent-data-view-history")
-    public ResponsePatientUrgentDataViewHistory getViewHistory(@PathVariable String id) {
-        return new ResponsePatientUrgentDataViewHistory();
+    public ResponsePatientUrgentDataViewHistory getViewHistory(@PathVariable String patientId) {
+        return new ResponsePatientUrgentDataViewHistory(patientService.getViewHistory(patientId));
     }
 }

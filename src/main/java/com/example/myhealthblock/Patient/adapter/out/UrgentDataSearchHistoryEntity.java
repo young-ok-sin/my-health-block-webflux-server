@@ -23,6 +23,9 @@ public class UrgentDataSearchHistoryEntity {
     private String doctorId;
 
     @Column
+    private String patientId;
+
+    @Column
     private String reason;
 
     @Column
