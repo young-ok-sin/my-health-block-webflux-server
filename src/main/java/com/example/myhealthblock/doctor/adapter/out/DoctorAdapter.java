@@ -18,4 +18,16 @@ public class DoctorAdapter implements DoctorOutport {
 
         return true;
     }
+
+    @Override
+    public boolean deleteData(String doctorId) {
+        DoctorEntity doctor = getDoctorEntity(doctorId);
+        doctor.deleteData();
+        this.doctorRepository.save(doctor);
+        return true;
+    }
+
+    private DoctorEntity getDoctorEntity(String doctorId) {
+        return this.doctorRepository.findByUserId(doctorId);
+    }
 }

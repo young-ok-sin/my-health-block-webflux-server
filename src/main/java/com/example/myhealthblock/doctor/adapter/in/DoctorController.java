@@ -40,8 +40,8 @@ public class DoctorController {
 
     @Operation(summary = "저장된 개인정보 삭제", description = "회원 탈퇴 기능이 아닌 저장된 정보를 삭제 <br>{doctorId}는 의료진이 가입한 아이디")
     @DeleteMapping("/test-0/doctor/{doctorId}")
-    public ResponseResult delete(@PathVariable String id) {
-        return new ResponseResult();
+    public ResponseResult delete(@PathVariable String doctorId) {
+        return new ResponseResult(doctorService.deleteData(doctorId));
     }
 
     @Operation(summary = "의료진 프로필 조회", description = "의료진의 데이터 중 공개용 데이터 조회 <br>{doctorId}는 의료진이 가입한 아이디")

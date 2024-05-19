@@ -30,4 +30,9 @@ public class DoctorService {
     public String getPatientUrgentData(RequestPatientUrgentData dto) {
         return patientInport.getUrgentData(dto.getPatientId(), dto.getReason(), dto.getDoctorId());
     }
+
+    public String deleteData(String doctorId) {
+        boolean result = outport.deleteData(doctorId);
+        return result ? "success" : "fail";
+    }
 }
