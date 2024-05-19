@@ -50,4 +50,9 @@ public class UserEntity {
     @OneToMany
     @JoinColumn(name = "userId")
     private List<OpinionEntity> opinions;
+
+    public void setPw(String pw) {
+        this.pw = pw;
+        this.lastEditDate = LocalDateTime.now();
+    }
 }

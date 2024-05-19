@@ -34,6 +34,17 @@ public class UserAdapter implements UserOutport {
         return new UserEntityDTO(getUserEntity(id));
     }
 
+    @Override
+    public boolean updatePw(String userId, String pw) {
+        UserEntity userEntity = getUserEntity(userId);
+        if (userEntity != null) {
+            userEntity.setPw(pw);
+            userRepository.save(userEntity);
+            return true;
+        }
+        return false;
+    }
+
     private UserEntity getUserEntity(String id) {
         return this.userRepository.findByUserId(id);
     }

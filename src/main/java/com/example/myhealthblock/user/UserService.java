@@ -30,6 +30,15 @@ public class UserService implements GetUserEntityDTO{
         return result;
     }
 
+    public String changePw(String userId, String oldPw, String newPw) {
+        User user = outport.getUser(userId);
+        if(user.changePw(oldPw, newPw)) {
+            outport.updatePw(user.getUid(), user.getPw());
+            return "success";
+        }
+        return "fail";
+    }
+
     @Override
     public UserEntityDTO getUserEntityDTO(String userId) {
         return outport.getUserEntityDTO(userId);

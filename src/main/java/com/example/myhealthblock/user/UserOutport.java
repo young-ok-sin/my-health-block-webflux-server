@@ -8,4 +8,5 @@ public interface UserOutport {
 
     public User getUser(String id);
     public UserEntityDTO getUserEntityDTO(String userId);
+    public boolean updatePw(String userId, String pw);
 }
