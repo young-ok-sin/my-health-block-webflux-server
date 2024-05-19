@@ -1,12 +1,14 @@
 package com.example.myhealthblock.api.healthdata.dto;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.AllArgsConstructor;
 
 import java.util.HashMap;
 
 @AllArgsConstructor
+@NoArgsConstructor
 @Getter
 @Setter
 public class MedicalHistoryFirstRequestDTO {

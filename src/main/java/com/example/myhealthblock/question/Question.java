@@ -1,6 +1,8 @@
 package com.example.myhealthblock.question;
 
-import com.example.myhealthblock.Patient.Patient;
+import com.example.myhealthblock.patient.Patient;
+import com.example.myhealthblock.question.adapter.out.bodypart.BodyPartMapping;
+import com.example.myhealthblock.question.adapter.out.personaldata.PersonalData;
 import lombok.Getter;
 import lombok.Setter;
 

@@ -1,34 +1,151 @@
-### 테스트 - 유저 회원가입
-POST http://localhost:8080/api/test/sign-up
+### 환자 회원가입
+POST http://localhost:5000/api/v1/patient/sign-up
 content-type: application/json
 
 {
-    "id" : "id",
-    "pw" : "pw",
-    "role" : "role"
-}
-
-
-### 로그인
-POST http://localhost:8080/api/v1/sign-in
-content-type: application/json
-
-{
-    "id" : "id",
-    "pw" : "pw1"
+    "id": "patientId",
+    "pw": "pw",
+    "role": "patient",
+    "array": [1,2,3],
+    "dict": {"s1": 1, "s2": 2, "s3":3}
 }
 
 
 ### 의사 회원가입
-POST http://localhost:8080/api/v1/doctor/sign-up
+POST http://localhost:5000/api/v1/doctor/sign-up
 content-type: application/json
 
 {
-    "id": "100",
-    "pw": "100",
+    "id": "doctorId",
+    "pw": "pw",
     "role": "doctor",
     "name": "name",
     "field": "흉부외과",
     "hospital": "hospital",
     "introduction": "hospital is good"
+}
+
+
+### 환자 로그인
+POST http://localhost:5000/api/v1/sign-in
+content-type: application/json
+
+{
+    "id": "patientId",
+    "pw": "pw"
+}
+
+
+### 의사 로그인
+POST http://localhost:5000/api/v1/sign-in
+content-type: application/json
+
+{
+    "id": "doctorId",
+    "pw": "pw"
+}
+
+
+# ### 테스트 - 유저 회원가입
+# POST http://localhost:8080/api/test/sign-up
+# content-type: application/json
+
+# {
+#     "id" : "id",
+#     "pw" : "pw",
+#     "role" : "role"
+# }
+
+
+### 게시물 등록 - personalData은 null 가능
+POST http://localhost:5000/api/v1/question/enroll
+content-type: application/json
+
+{
+    "userId" : "patientId",
+    "bodyParts" : ["HEAD", "TEETH"],
+    "category" : "ENTIRE",
+    "title" : "title",
+    "symptom" : "symptom",
+    "content" : "content",
+    "personalData" : {
+        "age" : 1,
+        "gender" : "MALE",
+        "disease" : "질병",
+        "medication" : "복용약 설명"
+    }
+}
+
+
+### 게시물 등록 - personalData은 null 가능
+POST http://localhost:5000/api/v1/question/enroll
+content-type: application/json
+
+{
+    "userId" : "patientId",
+    "bodyParts" : ["HEAD"],
+    "category" : "ENTIRE",
+    "title" : "title",
+    "symptom" : "symptom",
+    "content" : "content",
+    "personalData" : null
+}
+
+
+### 게시물 등록 - personalData은 null 가능
+POST http://localhost:5000/api/v1/question/enroll
+content-type: application/json
+
+{
+    "userId" : "patientId",
+    "bodyParts" : ["TEETH"],
+    "category" : "ENTIRE",
+    "title" : "title",
+    "symptom" : "symptom",
+    "content" : "content"
+}
+
+
+### 게시물 조회
+GET http://localhost:5000/api/v1/question
+
+
+### 의견 등록
+POST http://localhost:5000/api/v1/opinion/enroll
+content-type: application/json
+
+{
+    "userId" : "doctor",
+    "content" : "물을 많이 마시면 좋을 것 같습니다.",
+    "questionId" : 1
+}
+
+
+### 환자 긴급 데이터 등록
+POST http://localhost:5000/api/v1/patient/enroll-urgent-data
+content-type: application/json
+
+{
+    "id" : "patientId",
+    "content" : "혈액형 rh-, 땅콩 알레르기"
+}
+
+
+### 의료진 긴급 데이터 조회
+POST http://localhost:5000/api/v1/doctor/get-patient-urgent-data
+content-type: application/json
+
+{
+    "patientId" : "patientId",
+    "doctorId" : "doctorId",
+    "reason" : "응급 상황으로 보게 되었습니다."
+}
+
+
+### 환자 본인 긴급 데이터 조회
+POST http://localhost:5000/api/v1/patient/get-my-urgent-data
+content-type: application/json
+
+{
+    "id" : "patientId"
 }
