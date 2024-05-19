@@ -1,4 +1,6 @@
-src/main/java/com/example/myhealthblock/api/healthdata/specific
+#src/main/java/com/example/myhealthblock/api/healthdata/specific
+logs/*
+src\main\java\com\example\myhealthblock\api\healthdata\specific\EasyCodefClientInfo.java
 
 HELP.md
 .gradle

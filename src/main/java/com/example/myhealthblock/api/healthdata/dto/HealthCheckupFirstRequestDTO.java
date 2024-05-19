@@ -17,7 +17,7 @@ public class HealthCheckupFirstRequestDTO {
     private String loginTypeLevel;
     private String phoneNo;
     private String id;
-    private String injuryType;
+    private String inquiryType;
     private String type;
     private String telecom;
 
@@ -31,9 +31,9 @@ public class HealthCheckupFirstRequestDTO {
         parameterMap.put("phoneNo", phoneNo);
         parameterMap.put("id", id);
         parameterMap.put("identity", identity);
-        parameterMap.put("injuryType", injuryType);
+        parameterMap.put("inquiryType", inquiryType);
         parameterMap.put("type", type);
-        parameterMap.put("telecom", telecom);
+        parameterMap.put("telecom",  telecom);
 
         return parameterMap;
     }

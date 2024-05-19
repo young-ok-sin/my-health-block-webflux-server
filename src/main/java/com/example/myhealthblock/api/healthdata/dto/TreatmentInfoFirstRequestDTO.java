@@ -37,6 +37,7 @@ public class TreatmentInfoFirstRequestDTO {
         parameterMap.put("drugImageYN", drugImageYN);
         parameterMap.put("medicationDirectionYN", medicationDirectionYN);
         parameterMap.put("telecom", telecom);
+        parameterMap.put("type", type);
 
         return parameterMap;
     }
