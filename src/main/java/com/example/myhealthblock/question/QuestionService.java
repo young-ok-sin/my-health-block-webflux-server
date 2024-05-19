@@ -35,4 +35,9 @@ public class QuestionService {
         boolean result = outport.update(questionId, title, symptom, content);
         return result ? "success" : "fail";
     }
+
+    public String delete(Integer questionId) {
+        boolean result = outport.delete(questionId);
+        return result ? "success" : "fail";
+    }
 }

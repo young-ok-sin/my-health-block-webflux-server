@@ -49,7 +49,7 @@ public class QuestionController {
     @Operation(summary = "질문 삭제", description = "질문 삭제 <br>{questionId}는 식별자")
     @DeleteMapping("/test-0/question/{questionId}")
     public ResponseResult delete(@PathVariable Integer questionId) {
-        return new ResponseResult();
+        return new ResponseResult(questionService.delete(questionId));
     }
 
     @Operation(summary = "질문 목록 조회", description = "질문 식별자와 제목으로 목록 조회 <br>catetory는 게시판 카테고리<br>userId는 회원가입 아이디 <br>userId 미입력 시, 전체 목록 조회<br>userId 입력 시, 특정 회원이 작성한 질문 목록 조회")

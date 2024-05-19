@@ -81,6 +81,12 @@ public class QuestionAdapter implements QuestionOutport {
     @Override
     public boolean delete(int id) {
         QuestionEntity questionEntity = getQuestionEntity(id);
+
+        PersonalDataEntity personalData = personalDataRepository.findByQuestion(questionEntity);
+        if (personalData != null) {
+            personalDataRepository.delete(personalData);
+        }
+
         if (questionEntity == null) {
             return false;
         }
