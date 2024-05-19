@@ -42,6 +42,11 @@ public class PatientService implements GetPatientEntityDTO, GetPatientUrgentData
         return outport.getUrgentData(id, reason, doctorId);
     }
 
+    public String deleteUrgentData(String patientId) {
+        boolean result = outport.deleteUrgentData(patientId);
+        return result ? "success" : "fail";
+    }
+
     @Override
     public PatientEntityDTO getPatientEntityDTO(String uid) { // interface로 노출할 필요 존재
         return outport.getUserEntityDTO(uid);

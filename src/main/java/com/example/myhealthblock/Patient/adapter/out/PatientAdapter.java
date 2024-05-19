@@ -53,6 +53,11 @@ public class PatientAdapter implements PatientOutport {
         return data;
     }
 
+    @Override
+    public boolean deleteUrgentData(String patientId) {
+        return enrollUrgentData(patientId, "");
+    }
+
     private PatientEntity getPatientEntity(String id) {
         return this.patientRepository.findByUserId(id);
     }
