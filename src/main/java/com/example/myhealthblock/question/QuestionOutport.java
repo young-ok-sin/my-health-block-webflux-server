@@ -5,6 +5,7 @@ import com.example.myhealthblock.question.adapter.out.bodypart.BodyPart;
 import com.example.myhealthblock.question.dto.PersonalDataDTO;
 import com.example.myhealthblock.question.dto.QuestionDTO;
 import com.example.myhealthblock.question.dto.QuestionEntityDTO;
+import com.example.myhealthblock.question.dto.QuestionTitleDTO;
 
 import java.util.List;
 
@@ -14,8 +15,8 @@ public interface QuestionOutport {
 
     public boolean delete(int id);
     public QuestionDTO[] getQuestions();
-
-    public QuestionDTO[] getMyQuestions(PatientEntity patient);
+    public QuestionTitleDTO[] getQuestions(PatientEntity patient);
+    public QuestionTitleDTO[] getQuestions(Category category);
     public QuestionEntityDTO getQuestionEntityDTO(int id);
     public boolean update(Integer questionId, String title, String symptom, String content);
 }

@@ -6,6 +6,7 @@ import com.example.myhealthblock.question.adapter.out.QuestionAdapter;
 import com.example.myhealthblock.question.dto.QuestionDTO;
 import com.example.myhealthblock.question.adapter.in.request.RequestQuestionEnroll;
 import com.example.myhealthblock.question.dto.QuestionEntityDTO;
+import com.example.myhealthblock.question.dto.QuestionTitleDTO;
 import org.springframework.stereotype.Service;
 import lombok.RequiredArgsConstructor;
 
@@ -25,6 +26,15 @@ public class QuestionService {
 
     public QuestionDTO[] getQuestions() {
         return outport.getQuestions();
+    }
+
+    public QuestionTitleDTO[] getQuestions(String userId) {
+        PatientEntityDTO patientDto = patientInport.getPatientEntityDTO(userId);
+        return outport.getQuestions(patientDto.getEntity());
+    }
+
+    public QuestionTitleDTO[] getQuestions(Category category) {
+        return outport.getQuestions(category);
     }
 
     public QuestionEntityDTO getQuestionEntityDTO(int questionId) { // inport interface로 노출할 필요 존재

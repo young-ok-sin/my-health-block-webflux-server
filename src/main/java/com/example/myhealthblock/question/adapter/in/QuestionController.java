@@ -10,6 +10,7 @@ import com.example.myhealthblock.question.adapter.in.response.ResponseQuestionLi
 import com.example.myhealthblock.question.adapter.in.response.ResponseQuestion;
 import com.example.myhealthblock.question.adapter.in.response.ResponseQuestions;
 import com.example.myhealthblock.question.adapter.in.response.ResponseResult;
+import com.example.myhealthblock.question.dto.QuestionTitleDTO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.web.bind.annotation.*;
@@ -55,15 +56,16 @@ public class QuestionController {
     @Operation(summary = "질문 목록 조회", description = "질문 식별자와 제목으로 목록 조회 <br>catetory는 게시판 카테고리<br>userId는 회원가입 아이디 <br>userId 미입력 시, 전체 목록 조회<br>userId 입력 시, 특정 회원이 작성한 질문 목록 조회")
     @GetMapping("/test-1/question/list")
     public ResponseQuestionList getTitles(
-            @RequestParam Category category,
+            @RequestParam(required = false) Category category,
             @RequestParam(required = false) String userId
     ) {
+        QuestionTitleDTO[] list = null;
         if (userId != null) {
-//            특정 인물의 질문 리스트 조회
-        } else {
-//            일반 질문 리스트 조회
+            list = questionService.getQuestions(userId);
+        } else if (category != null){
+            list = questionService.getQuestions(category);
         }
-        return new ResponseQuestionList();
+        return new ResponseQuestionList(list);
     }
 
     @Operation(summary = "질문 조회", description = "하나의 질문 정보 조회 <br>{questionId}는 식별자 <br>질문 목록에서 선택한 하나의 질문 내용 조회")

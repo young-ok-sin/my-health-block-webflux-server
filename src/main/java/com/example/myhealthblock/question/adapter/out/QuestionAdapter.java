@@ -15,6 +15,7 @@ import com.example.myhealthblock.question.adapter.out.personaldata.PersonalDataE
 import com.example.myhealthblock.question.adapter.out.personaldata.PersonalDataRepository;
 
 import com.example.myhealthblock.question.dto.QuestionEntityDTO;
+import com.example.myhealthblock.question.dto.QuestionTitleDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -57,9 +58,15 @@ public class QuestionAdapter implements QuestionOutport {
         return getQuestionDTOs(this.questionRepository.findAll());
     }
 
+
     @Override
-    public QuestionDTO[] getMyQuestions(PatientEntity patient) {
-        return getQuestionDTOs(this.questionRepository.findByPatient(patient));
+    public QuestionTitleDTO[] getQuestions(PatientEntity patient) {
+        return getQuestionTitleDTOs(this.questionRepository.findByPatient(patient));
+    }
+
+    @Override
+    public QuestionTitleDTO[] getQuestions(Category category) {
+        return getQuestionTitleDTOs(this.questionRepository.findAllByCategory(category));
     }
 
     @Override
@@ -127,6 +134,12 @@ public class QuestionAdapter implements QuestionOutport {
         return this.questionRepository.findById(id).orElse(null);
     }
 
+    private QuestionTitleDTO[] getQuestionTitleDTOs(List<QuestionEntity> questionEntities) {
+        return questionEntities.stream()
+                .map(this::getQuestionTitleDTO)
+                .toArray(QuestionTitleDTO[]::new);
+    }
+
     private QuestionDTO[] getQuestionDTOs(List<QuestionEntity> questionEntities) {
         return questionEntities.stream()
                 .map(this::getQuestionDTO)
@@ -147,6 +160,10 @@ public class QuestionAdapter implements QuestionOutport {
                 bodyParts,
                 personalData
         );
+    }
+
+    private QuestionTitleDTO getQuestionTitleDTO(QuestionEntity questionEntity) {
+        return new QuestionTitleDTO(questionEntity.getId(), questionEntity.getTitle());
     }
 
     private PersonalDataDTO getPersonalDataDTO(PersonalDataEntity personalDataEntity) {
