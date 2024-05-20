@@ -71,6 +71,6 @@ public class QuestionController {
     @Operation(summary = "질문 조회", description = "하나의 질문 정보 조회 <br>{questionId}는 식별자 <br>질문 목록에서 선택한 하나의 질문 내용 조회")
     @GetMapping("/test-0/question/{questionId}")
     public ResponseQuestion get(@PathVariable Integer questionId) {
-        return new ResponseQuestion();
+        return new ResponseQuestion(questionService.getQuestion(questionId));
     }
 }

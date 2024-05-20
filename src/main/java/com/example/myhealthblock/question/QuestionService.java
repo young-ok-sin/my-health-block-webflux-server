@@ -28,6 +28,10 @@ public class QuestionService {
         return outport.getQuestions();
     }
 
+    public QuestionDTO getQuestion(Integer questionId) {
+        return outport.getQuestion(questionId);
+    }
+
     public QuestionTitleDTO[] getQuestions(String userId) {
         PatientEntityDTO patientDto = patientInport.getPatientEntityDTO(userId);
         return outport.getQuestions(patientDto.getEntity());
