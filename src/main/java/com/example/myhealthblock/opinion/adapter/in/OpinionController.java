@@ -29,8 +29,8 @@ public class OpinionController {
 
     @Operation(summary = "의견 삭제", description = "유저가 의견 삭제 <br>{opinionId}는 식별자")
     @DeleteMapping("/test-0/opinion/{opinionId}")
-    public ResponseResult delete(@PathVariable Integer id) {
-        return new ResponseResult(opinionService.delete(id));
+    public ResponseResult delete(@PathVariable Integer opinionId) {
+        return new ResponseResult(opinionService.delete(opinionId));
     }
 
     @Operation(summary = "의견들 조회", description = "유저가 의견들 조회 <br>questionId는 질문 식별자로, 입력 시 특정 질문에 대한 의견들 조회 <br>userId는 회원가입 시 등록한 아이디로, 입력 시 본인이 등록한 의견들 조회<br>둘 중 하나만 입력")
