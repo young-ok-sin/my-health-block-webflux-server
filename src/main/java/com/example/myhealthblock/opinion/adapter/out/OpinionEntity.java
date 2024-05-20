@@ -7,6 +7,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.util.Date;
 
@@ -14,6 +16,7 @@ import java.util.Date;
 @Setter
 @Entity(name = "opinion")
 @NoArgsConstructor
+@EntityListeners(AuditingEntityListener.class)
 public class OpinionEntity {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -29,6 +32,10 @@ public class OpinionEntity {
     private QuestionEntity question;
 
     @CreatedDate
+    @Temporal(TemporalType.TIMESTAMP)
     private Date createDate;
 
+    @LastModifiedDate
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date lastModifiedDate;
 }
