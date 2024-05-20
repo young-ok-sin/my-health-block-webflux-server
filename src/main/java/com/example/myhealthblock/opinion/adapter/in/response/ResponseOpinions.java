@@ -1,5 +1,6 @@
 package com.example.myhealthblock.opinion.adapter.in.response;
 
+import com.example.myhealthblock.opinion.dto.OpinionDTO;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,14 +13,5 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ResponseOpinions {
-    private Opinion[] opinions;
-
-    @Getter
-    @Setter
-    public static class Opinion {
-        private Integer id;
-        private String userId;
-        private String content;
-        private Date createDate;
-    }
+    private OpinionDTO[] opinions;
 }

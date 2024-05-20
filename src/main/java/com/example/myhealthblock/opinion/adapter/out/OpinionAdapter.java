@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.Date;
 import java.util.List;
 
 @LogExecutionTime(logTarget = LogTarget.ADAPTER)
@@ -33,12 +34,15 @@ public class OpinionAdapter implements OpinionOutport {
     }
 
     @Override
-    public OpinionDTO getOpinion(int id) {
-        OpinionEntity opinion = opinionRepository.findById(id).orElse(null);
-        if (opinion == null) {
-            return null;
-        }
-        return mapToDTO(opinion);
+    public OpinionDTO[] getOpinions(UserEntity user) {
+        List<OpinionEntity> opinions = opinionRepository.findByUser(user);
+        return getOpinionDTOs(opinions);
+    }
+
+    @Override
+    public OpinionDTO[] getOpinions(QuestionEntity question) {
+        List<OpinionEntity> opinions = opinionRepository.findByQuestion(question);
+        return getOpinionDTOs(opinions);
     }
 
     @Transactional
@@ -58,16 +62,6 @@ public class OpinionAdapter implements OpinionOutport {
         }
     }
 
-    @Override
-    public OpinionDTO[] getOpinions() {
-        return getOpinionDTOs(opinionRepository.findAll());
-    }
-
-    @Override
-    public OpinionDTO[] getMyOpinions(UserEntity user) {
-        return getOpinionDTOs(opinionRepository.findByUser(user));
-    }
-
     private OpinionDTO[] getOpinionDTOs(List<OpinionEntity> opinions) {
         return opinions.stream()
                 .map(this::mapToDTO)
@@ -76,10 +70,11 @@ public class OpinionAdapter implements OpinionOutport {
 
     private OpinionDTO mapToDTO(OpinionEntity opinion) {
         int id = opinion.getId();
-        UserEntity user = opinion.getUser();
+        String userId = opinion.getUser().getUserId();
         String content = opinion.getContent();
-        QuestionEntity question = opinion.getQuestion();
+        Date createDate = opinion.getCreateDate();
+        Date lastModifiedDate = opinion.getLastModifiedDate();
 
-        return new OpinionDTO(id, user, content, question);
+        return new OpinionDTO(id, userId, content, createDate, lastModifiedDate);
     }
 }

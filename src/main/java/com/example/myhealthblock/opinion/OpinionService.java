@@ -2,6 +2,7 @@ package com.example.myhealthblock.opinion;
 
 import com.example.myhealthblock.opinion.adapter.out.OpinionAdapter;
 import com.example.myhealthblock.opinion.adapter.in.request.RequestOpinionEnroll;
+import com.example.myhealthblock.opinion.dto.OpinionDTO;
 import com.example.myhealthblock.question.QuestionService;
 import com.example.myhealthblock.question.dto.QuestionEntityDTO;
 import com.example.myhealthblock.user.UserService;
@@ -24,6 +25,16 @@ public class OpinionService {
         boolean result = outport.create(questionDto.getEntity(), userDto.getEntity(), dto.getContent());
 
         return result ? "success" : "fail";
+    }
+
+    public OpinionDTO[] getOpinions(String userId) {
+        UserEntityDTO userDto = userInport.getUserEntityDTO(userId);
+        return outport.getOpinions(userDto.getEntity());
+    }
+
+    public OpinionDTO[] getOpinions(Integer questionId) {
+        QuestionEntityDTO questionDto = questionInport.getQuestionEntityDTO(questionId);
+        return outport.getOpinions(questionDto.getEntity());
     }
 
     public String delete(Integer opinionId) {

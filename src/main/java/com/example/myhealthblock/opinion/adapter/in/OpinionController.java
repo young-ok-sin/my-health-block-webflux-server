@@ -6,6 +6,7 @@ import com.example.myhealthblock.opinion.OpinionService;
 import com.example.myhealthblock.opinion.adapter.in.request.RequestOpinionEnroll;
 import com.example.myhealthblock.opinion.adapter.in.response.ResponseOpinions;
 import com.example.myhealthblock.opinion.adapter.in.response.ResponseResult;
+import com.example.myhealthblock.opinion.dto.OpinionDTO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
@@ -34,16 +35,17 @@ public class OpinionController {
     }
 
     @Operation(summary = "의견들 조회", description = "유저가 의견들 조회 <br>questionId는 질문 식별자로, 입력 시 특정 질문에 대한 의견들 조회 <br>userId는 회원가입 시 등록한 아이디로, 입력 시 본인이 등록한 의견들 조회<br>둘 중 하나만 입력")
-    @GetMapping("/test-0/opinions")
+    @GetMapping("/test-1/opinions")
     public ResponseOpinions getOpinions(
             @RequestParam(required = false) Integer questionId,
             @RequestParam(required = false) String userId
     ) {
+        OpinionDTO[] list = null;
         if (userId != null) {
-//            특정 사용자가 작성한 의견 조회
-        } else {
-//            특정 질문에 대한 의견 조회
+            list = opinionService.getOpinions(userId);
+        } else if (questionId != null){
+            list = opinionService.getOpinions(questionId);
         }
-        return new ResponseOpinions();
+        return new ResponseOpinions(list);
     }
 }
