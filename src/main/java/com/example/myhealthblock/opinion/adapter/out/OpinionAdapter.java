@@ -8,6 +8,9 @@ import com.example.myhealthblock.question.adapter.out.QuestionEntity;
 import com.example.myhealthblock.user.adapter.out.UserEntity;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.List;
 
@@ -15,6 +18,8 @@ import java.util.List;
 @RequiredArgsConstructor
 @Service
 public class OpinionAdapter implements OpinionOutport {
+    private static final Logger logger = LoggerFactory.getLogger(OpinionAdapter.class);
+
     private final OpinionRepository opinionRepository;
 
     @Override
@@ -36,14 +41,21 @@ public class OpinionAdapter implements OpinionOutport {
         return mapToDTO(opinion);
     }
 
+    @Transactional
     @Override
     public boolean delete(int id) {
-        OpinionEntity opinion = opinionRepository.findById(id).orElse(null);
-        if (opinion == null) {
+        try {
+            OpinionEntity opinion = opinionRepository.findById(id).orElse(null);
+            if (opinion == null) {
+                logger.warn("Opinion with id {} not found.", id);
+                return false;
+            }
+            opinionRepository.delete(opinion);
+            return true;
+        } catch (Exception e) {
+            logger.error("Error deleting opinion with id {}: {}", id, e.getMessage());
             return false;
         }
-        opinionRepository.delete(opinion);
-        return true;
     }
 
     @Override

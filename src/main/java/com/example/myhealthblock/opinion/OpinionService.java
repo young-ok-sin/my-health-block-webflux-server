@@ -25,4 +25,9 @@ public class OpinionService {
 
         return result ? "success" : "fail";
     }
+
+    public String delete(Integer opinionId) {
+        boolean result = outport.delete(opinionId);
+        return result ? "success" : "fail";
+    }
 }
