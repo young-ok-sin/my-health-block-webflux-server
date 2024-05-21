@@ -9,6 +9,6 @@ import java.util.List;
 
 public interface QuestionRepository extends JpaRepository<QuestionEntity, Integer> {
 
-    List<QuestionEntity> findByPatient(PatientEntity patient);
+    List<QuestionEntity> findAllByPatient(PatientEntity patient);
     List<QuestionEntity> findAllByCategory(Category category);
 }

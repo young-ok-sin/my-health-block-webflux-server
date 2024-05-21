@@ -60,7 +60,7 @@ public class QuestionAdapter implements QuestionOutport {
 
     @Override
     public QuestionDTO[] getQuestionsWithDetail(PatientEntity patient) {
-        return getQuestionDTOs(this.questionRepository.findByPatient(patient));
+        return getQuestionDTOs(this.questionRepository.findAllByPatient(patient));
     }
 
     @Override
@@ -71,7 +71,7 @@ public class QuestionAdapter implements QuestionOutport {
 
     @Override
     public QuestionTitleDTO[] getQuestions(PatientEntity patient) {
-        return getQuestionTitleDTOs(this.questionRepository.findByPatient(patient));
+        return getQuestionTitleDTOs(this.questionRepository.findAllByPatient(patient));
     }
 
     @Override
