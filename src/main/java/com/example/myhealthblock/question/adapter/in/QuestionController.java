@@ -10,6 +10,7 @@ import com.example.myhealthblock.question.adapter.in.response.ResponseQuestionLi
 import com.example.myhealthblock.question.adapter.in.response.ResponseQuestion;
 import com.example.myhealthblock.question.adapter.in.response.ResponseQuestions;
 import com.example.myhealthblock.question.adapter.in.response.ResponseResult;
+import com.example.myhealthblock.question.dto.QuestionDTO;
 import com.example.myhealthblock.question.dto.QuestionTitleDTO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -35,9 +36,20 @@ public class QuestionController {
 
     @Operation(summary = "질문들 조회", description = "질문들 내용까지 함께 조회")
     @GetMapping("/v1/question")
-    public ResponseQuestions enroll() {
+    public ResponseQuestions getQuestions(
+            @RequestParam(required = false) Category category,
+            @RequestParam(required = false) String userId
+    ) {
         ResponseQuestions response  = new ResponseQuestions();
-        response.setQuestions(questionService.getQuestions());
+        QuestionDTO[] list = null;
+        if (userId != null) {
+            list = questionService.getQuestionsWithDetail(userId);
+        } else if (category != null){
+            list = questionService.getQuestionsWithDetail(category);
+        } else {
+            list = questionService.getQuestionsWithDetail();
+        }
+        response.setQuestions(list);
         return response;
     }
 

@@ -54,8 +54,18 @@ public class QuestionAdapter implements QuestionOutport {
     }
 
     @Override
-    public QuestionDTO[] getQuestions() {
+    public QuestionDTO[] getQuestionsWithDetail() {
         return getQuestionDTOs(this.questionRepository.findAll());
+    }
+
+    @Override
+    public QuestionDTO[] getQuestionsWithDetail(PatientEntity patient) {
+        return getQuestionDTOs(this.questionRepository.findByPatient(patient));
+    }
+
+    @Override
+    public QuestionDTO[] getQuestionsWithDetail(Category category) {
+        return getQuestionDTOs(this.questionRepository.findAllByCategory(category));
     }
 
 

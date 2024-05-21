@@ -24,8 +24,17 @@ public class QuestionService {
         return result ? "success" : "fail";
     }
 
-    public QuestionDTO[] getQuestions() {
-        return outport.getQuestions();
+    public QuestionDTO[] getQuestionsWithDetail() {
+        return outport.getQuestionsWithDetail();
+    }
+
+    public QuestionDTO[] getQuestionsWithDetail(String userId) {
+        PatientEntityDTO patientDto = patientInport.getPatientEntityDTO(userId);
+        return outport.getQuestionsWithDetail(patientDto.getEntity());
+    }
+
+    public QuestionDTO[] getQuestionsWithDetail(Category category) {
+        return outport.getQuestionsWithDetail(category);
     }
 
     public QuestionDTO getQuestion(Integer questionId) {
