@@ -18,10 +18,10 @@ public class HealthCheckupFirstRequestDTO {
     private String userName;
     private String loginTypeLevel;
     private String phoneNo;
-    private String id;
     private String inquiryType;
     private String type;
     private String telecom;
+    private String timeOut;
 
     public HashMap<String, Object> getHashMap() {
         HashMap<String, Object> parameterMap = new HashMap<String, Object>();
@@ -31,11 +31,11 @@ public class HealthCheckupFirstRequestDTO {
         parameterMap.put("loginTypeLevel", loginTypeLevel);
         parameterMap.put("userName", userName);
         parameterMap.put("phoneNo", phoneNo);
-        parameterMap.put("id", id);
         parameterMap.put("identity", identity);
         parameterMap.put("inquiryType", inquiryType);
         parameterMap.put("type", type);
         parameterMap.put("telecom",  telecom);
+        parameterMap.put("timeOut", timeOut);
 
         return parameterMap;
     }

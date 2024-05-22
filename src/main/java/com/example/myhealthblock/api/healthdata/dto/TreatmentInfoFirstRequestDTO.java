@@ -14,7 +14,6 @@ import java.util.HashMap;
 public class TreatmentInfoFirstRequestDTO {
     private String organization;
     private String loginType;
-    private String id;
     private String identity;
     private String userName;
     private String loginTypeLevel;
@@ -30,7 +29,6 @@ public class TreatmentInfoFirstRequestDTO {
 
         parameterMap.put("organization", organization);
         parameterMap.put("loginType", loginType);
-        parameterMap.put("id", id);
         parameterMap.put("identity", identity);
         parameterMap.put("userName", userName);
         parameterMap.put("loginTypeLevel", loginTypeLevel);

@@ -20,7 +20,6 @@ public class MedicalHistorySecondRequestDTO {
     private String timeOut;
     private String drugImageYN;
     private String medicationDirectionYN;
-    private String type;
 
     private String simpleAuth;
     private boolean is2Way;
@@ -39,17 +38,16 @@ public class MedicalHistorySecondRequestDTO {
         parameterMap.put("loginTypeLevel", loginTypeLevel);
         parameterMap.put("phoneNo", phoneNo);
         parameterMap.put("telecom", telecom);
-        parameterMap.put("type", type);
         parameterMap.put("timeOut", timeOut);
         parameterMap.put("drugImageYN", drugImageYN);
         parameterMap.put("medicationDirectionYN", medicationDirectionYN);
 
-        parameterMap.put("simpleAuth", simpleAuth);
-        parameterMap.put("is2Way", is2Way);
+        parameterMap.put("simpleAuth", "1");
+        parameterMap.put("is2Way", true);
 
         HashMap<String, Object> twoWayInfo = new HashMap<String, Object>();
-        twoWayInfo.put("jobIndex", jobIndex);
-        twoWayInfo.put("threadIndex", threadIndex);
+        twoWayInfo.put("jobIndex", 0);
+        twoWayInfo.put("threadIndex", 0);
         twoWayInfo.put("jti", jti);
         twoWayInfo.put("twoWayTimestamp", twoWayTimestamp);
         parameterMap.put("twoWayInfo", twoWayInfo);
