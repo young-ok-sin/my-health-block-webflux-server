@@ -19,13 +19,11 @@ public class TreatmentInfoSecondRequestDTO {
 
     private String organization;
     private String loginType;
-    private String id;
-    private String identity;
     private String userName;
+    private String identity;
     private String loginTypeLevel;
     private String phoneNo;
     private String timeOut;
-    private String type;
     private String drugImageYN;
     private String medicationDirectionYN;
     private String telecom;
@@ -35,22 +33,19 @@ public class TreatmentInfoSecondRequestDTO {
 
         parameterMap.put("organization", organization);
         parameterMap.put("loginType", loginType);
-        parameterMap.put("id", id);
         parameterMap.put("identity", identity);
         parameterMap.put("userName", userName);
         parameterMap.put("loginTypeLevel", loginTypeLevel);
         parameterMap.put("phoneNo", phoneNo);
-        parameterMap.put("timeOut", timeOut);
         parameterMap.put("drugImageYN", drugImageYN);
         parameterMap.put("medicationDirectionYN", medicationDirectionYN);
         parameterMap.put("telecom", telecom);
-
-        parameterMap.put("simpleAuth", simpleAuth);
-        parameterMap.put("is2Way", is2Way);
+        parameterMap.put("simpleAuth", "1");
+        parameterMap.put("is2Way", true);
 
         HashMap<String, Object> twoWayInfo = new HashMap<String, Object>();
-        twoWayInfo.put("jobIndex", jobIndex);
-        twoWayInfo.put("threadIndex", threadIndex);
+        twoWayInfo.put("jobIndex", 0);
+        twoWayInfo.put("threadIndex", 0);
         twoWayInfo.put("jti", jti);
         twoWayInfo.put("twoWayTimestamp", twoWayTimestamp);
         parameterMap.put("twoWayInfo", twoWayInfo);

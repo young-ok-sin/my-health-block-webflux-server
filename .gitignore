@@ -1,5 +1,5 @@
 #src/main/java/com/example/myhealthblock/api/healthdata/specific
-src\main\java\com\example\myhealthblock\api\healthdata\specific\EasyCodefClientInfo.java
+src/main/java/com/example/myhealthblock/api/healthdata/specific/EasyCodefClientInfo.java
 logs/*
 
 HELP.md
