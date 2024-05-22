@@ -1,10 +1,9 @@
 package com.example.myhealthblock.api.healthdata;
 
 import java.util.HashMap;
+import java.util.Map;
 
 import com.example.myhealthblock.api.healthdata.specific.*;
-import lombok.Getter;
-import lombok.Setter;
 
 public class ApiAdapter implements ApiOutport{
 
@@ -23,11 +22,11 @@ public class ApiAdapter implements ApiOutport{
     public String requestHealthCheckupResult(HashMap<String, Object> data) { return api.requestHealthCheckupResult(data); }
 
     @Override
-    public String requestMedicalHistorySecond(HashMap<String, Object> data) { return api.requestCertificationMedicalHistory(data); }
+    public Map<String, Object> requestMedicalHistorySecond(HashMap<String, Object> data) { return api.requestCertificationMedicalHistory(data); }
 
     @Override
-    public String requestTreatmentInformationSecond(HashMap<String, Object> data) { return api.requestCertificationTreatmentInformation(data); }
+    public Map<String, Object> requestTreatmentInformationSecond(HashMap<String, Object> data) { return api.requestCertificationTreatmentInformation(data); }
 
     @Override
-    public String requestHealthCheckupResultSecond(HashMap<String, Object> data) { return api.requestCertificationHealthCheckupResult(data); }
+    public Map<String, Object> requestHealthCheckupResultSecond(HashMap<String, Object> data) { return api.requestCertificationHealthCheckupResult(data); }
 }
