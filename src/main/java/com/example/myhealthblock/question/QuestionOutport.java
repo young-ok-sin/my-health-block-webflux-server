@@ -16,6 +16,7 @@ public interface QuestionOutport {
     public QuestionDTO[] getQuestionsWithDetail();
     public QuestionDTO[] getQuestionsWithDetail(PatientEntity patient);
     public QuestionDTO[] getQuestionsWithDetail(Category category);
+    public QuestionDTO[] getQuestionsWithDetailByOpinionUserId(String opinionUserId);
     public QuestionTitleDTO[] getQuestions(PatientEntity patient);
     public QuestionTitleDTO[] getQuestions(Category category);
     public QuestionEntityDTO getQuestionEntityDTO(int id);

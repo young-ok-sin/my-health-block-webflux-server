@@ -37,6 +37,10 @@ public class QuestionService {
         return outport.getQuestionsWithDetail(category);
     }
 
+    public QuestionDTO[] getQuestionsWithDetailByOpinionUserId(String opinionUserId) {
+        return outport.getQuestionsWithDetailByOpinionUserId(opinionUserId);
+    }
+
     public QuestionDTO getQuestion(Integer questionId) {
         return outport.getQuestion(questionId);
     }

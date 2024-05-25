@@ -38,7 +38,8 @@ public class QuestionController {
     @GetMapping("/v1/question")
     public ResponseQuestions getQuestions(
             @RequestParam(required = false) Category category,
-            @RequestParam(required = false) String userId
+            @RequestParam(required = false) String userId,
+            @RequestParam(required = false) String opinionUserId
     ) {
         ResponseQuestions response  = new ResponseQuestions();
         QuestionDTO[] list = null;
@@ -46,6 +47,8 @@ public class QuestionController {
             list = questionService.getQuestionsWithDetail(userId);
         } else if (category != null){
             list = questionService.getQuestionsWithDetail(category);
+        } else if (opinionUserId != null) {
+            list = questionService.getQuestionsWithDetailByOpinionUserId(opinionUserId);
         } else {
             list = questionService.getQuestionsWithDetail();
         }
@@ -65,7 +68,7 @@ public class QuestionController {
         return new ResponseResult(questionService.delete(questionId));
     }
 
-    @Operation(summary = "질문 목록 조회", description = "질문 식별자와 제목으로 목록 조회 <br>catetory는 게시판 카테고리<br>userId는 회원가입 아이디 <br>userId 미입력 시, 전체 목록 조회<br>userId 입력 시, 특정 회원이 작성한 질문 목록 조회")
+    @Operation(summary = "질문 목록 조회", description = "질문 식별자와 제목으로 목록 조회 <br>catetory는 게시판 카테고리<br>userId는 회원가입 아이디")
     @GetMapping("/test-1/question/list")
     public ResponseQuestionList getTitles(
             @RequestParam(required = false) Category category,
