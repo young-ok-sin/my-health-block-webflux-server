@@ -24,13 +24,13 @@ public class OpinionAdapter implements OpinionOutport {
     private final OpinionRepository opinionRepository;
 
     @Override
-    public boolean create(QuestionEntity question, UserEntity user, String content) {
+    public OpinionDTO create(QuestionEntity question, UserEntity user, String content) {
         OpinionEntity opinion = new OpinionEntity();
         opinion.setContent(content);
         opinion.setUser(user);
         opinion.setQuestion(question);
         opinionRepository.save(opinion);
-        return true;
+        return mapToDTO(opinion);
     }
 
     @Override

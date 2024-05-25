@@ -19,12 +19,11 @@ public class OpinionService {
     //    private final GetQuestionEntityDTO questionInport; DI 컨테이너 학습 후 적용
     //    private final GetUserEntityDTO userInport; DI 컨테이너 학습 후 적용
 
-    public String enroll(RequestOpinionEnroll dto) {
+    public OpinionDTO enroll(RequestOpinionEnroll dto) {
         QuestionEntityDTO questionDto = questionInport.getQuestionEntityDTO(dto.getQuestionId());
         UserEntityDTO userDto = userInport.getUserEntityDTO(dto.getUserId());
-        boolean result = outport.create(questionDto.getEntity(), userDto.getEntity(), dto.getContent());
 
-        return result ? "success" : "fail";
+        return outport.create(questionDto.getEntity(), userDto.getEntity(), dto.getContent());
     }
 
     public OpinionDTO[] getOpinions(String userId) {
