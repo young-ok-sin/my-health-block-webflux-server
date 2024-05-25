@@ -1,9 +1,12 @@
 package com.example.myhealthblock.api.healthdata.specific;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.util.HashMap;
+import java.util.Map;
+
 @Getter
 @Setter
 public class RealApi implements Api{
@@ -45,29 +48,30 @@ public class RealApi implements Api{
     }
 
     @Override
-    public String requestCertificationMedicalHistory(HashMap<String, Object> parameterMap) {
+    public Map<String, Object> requestCertificationMedicalHistory(HashMap<String, Object> parameterMap) {
         return requestCertification(MEDICAL_HISTORY, parameterMap);
     }
 
     @Override
-    public String requestCertificationTreatmentInformation(HashMap<String, Object> parameterMap) {
+    public Map<String, Object> requestCertificationTreatmentInformation(HashMap<String, Object> parameterMap) {
         return requestCertification(TREATMENT_INFORMATION, parameterMap);
     }
 
     @Override
-    public String requestCertificationHealthCheckupResult(HashMap<String, Object> parameterMap) {
+    public Map<String, Object> requestCertificationHealthCheckupResult(HashMap<String, Object> parameterMap) {
         return requestCertification(HEALTH_CHECKUP_RESULT, parameterMap);
     }
 
-    private String requestCertification(String url, HashMap<String, Object> data) {
+    private Map<String, Object> requestCertification(String url, HashMap<String, Object> data) {
         String result = "";
-
+        ObjectMapper objectMapper = new ObjectMapper();
+        Map<String, Object> responseMap = new HashMap<>();
         try {
             result = codef.requestCertification(url, EasyCodefServiceType.DEMO, data);
+            responseMap = objectMapper.readValue(result, Map.class);
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-
-        return result;
+        return responseMap;
     }
 }

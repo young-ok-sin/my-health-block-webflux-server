@@ -17,10 +17,10 @@ public class HealthCheckupSecondRequestDTO {
     private String userName;
     private String loginTypeLevel;
     private String phoneNo;
-    private String id;
     private String inquiryType;
     private String type;
     private String telecom;
+    private String timeOut;
 
     private String simpleAuth;
     private boolean is2Way;
@@ -35,18 +35,16 @@ public class HealthCheckupSecondRequestDTO {
         parameterMap.put("loginTypeLevel", loginTypeLevel);
         parameterMap.put("userName", userName);
         parameterMap.put("phoneNo", phoneNo);
-        parameterMap.put("id", id);
         parameterMap.put("identity", identity);
+        parameterMap.put("timeOut", timeOut);
         parameterMap.put("inquiryType", inquiryType);
-        parameterMap.put("type", type);
         parameterMap.put("telecom",  telecom);
-
-        parameterMap.put("simpleAuth", simpleAuth);
-        parameterMap.put("is2Way", is2Way);
+        parameterMap.put("simpleAuth", "1");
+        parameterMap.put("is2Way", true);
 
         HashMap<String, Object> twoWayInfo = new HashMap<String, Object>();
-        twoWayInfo.put("jobIndex", jobIndex);
-        twoWayInfo.put("threadIndex", threadIndex);
+        twoWayInfo.put("jobIndex", 0);
+        twoWayInfo.put("threadIndex", 0);
         twoWayInfo.put("jti", jti);
         twoWayInfo.put("twoWayTimestamp", twoWayTimestamp);
         parameterMap.put("twoWayInfo", twoWayInfo);
