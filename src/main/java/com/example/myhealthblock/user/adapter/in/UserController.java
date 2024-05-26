@@ -35,7 +35,7 @@ public class UserController {
     }
 
     @Operation(summary = "비밀번호 수정", description = "비밀번호 수정 <br>userId는 회원가입 아이디")
-    @PutMapping("/test-0/user/{userId}/pw")
+    @PutMapping({"/v1/user/{userId}/pw", "/test-0/user/{userId}/pw"})
     public ResponseResult updatePw(@PathVariable String userId, @RequestBody RequestUserUpdatePw body) {
         return new ResponseResult(userService.changePw(userId, body.getOldPw(), body.getNewPw()));
     }
