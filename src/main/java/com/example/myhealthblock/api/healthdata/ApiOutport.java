@@ -1,13 +1,15 @@
 package com.example.myhealthblock.api.healthdata;
 
+import com.example.myhealthblock.api.healthdata.dto.response.HealthCheckupResponseDTO;
+import com.example.myhealthblock.api.healthdata.dto.response.TreatmentInfoResponseDTO;
+
 import java.util.HashMap;
-import java.util.Map;
 
 public interface ApiOutport {
-    public String requestMedicalHistory(HashMap<String, Object> data);
-    public String requestTreatmentInformation(HashMap<String, Object> data);
-    public String requestHealthCheckupResult(HashMap<String, Object> data);
-    public Map<String, Object> requestMedicalHistorySecond(HashMap<String, Object> data);
-    public Map<String, Object> requestTreatmentInformationSecond(HashMap<String, Object> data);
-    public Map<String, Object> requestHealthCheckupResultSecond(HashMap<String, Object> data);
+    String requestMedicalHistory(HashMap<String, Object> data);
+    String requestTreatmentInformation(HashMap<String, Object> data);
+    String requestHealthCheckupResult(HashMap<String, Object> data);
+//    public Map<String, Object> requestMedicalHistorySecond(HashMap<String, Object> data);
+    TreatmentInfoResponseDTO requestCertificationTreatmentInformation(HashMap<String, Object> parameterMap);
+    HealthCheckupResponseDTO requestCertificationHealthCheckupResult(HashMap<String, Object> parameterMap);
 }
