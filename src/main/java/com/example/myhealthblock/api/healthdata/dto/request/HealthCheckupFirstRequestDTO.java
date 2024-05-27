@@ -1,4 +1,4 @@
-package com.example.myhealthblock.api.healthdata.dto;
+package com.example.myhealthblock.api.healthdata.dto.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -11,33 +11,31 @@ import java.util.HashMap;
 @NoArgsConstructor
 @Getter
 @Setter
-public class TreatmentInfoFirstRequestDTO {
+public class HealthCheckupFirstRequestDTO {
     private String organization;
     private String loginType;
     private String identity;
     private String userName;
     private String loginTypeLevel;
     private String phoneNo;
-    private String timeOut;
+    private String inquiryType;
     private String type;
-    private String drugImageYN;
-    private String medicationDirectionYN;
     private String telecom;
+    private String timeOut;
 
     public HashMap<String, Object> getHashMap() {
         HashMap<String, Object> parameterMap = new HashMap<String, Object>();
 
-        parameterMap.put("organization", organization);
-        parameterMap.put("loginType", loginType);
-        parameterMap.put("identity", identity);
+        parameterMap.put("organization", "0002");
+        parameterMap.put("loginType", "5");
+        parameterMap.put("loginTypeLevel", "1");
         parameterMap.put("userName", userName);
-        parameterMap.put("loginTypeLevel", loginTypeLevel);
         parameterMap.put("phoneNo", phoneNo);
-        parameterMap.put("timeOut", timeOut);
-        parameterMap.put("drugImageYN", drugImageYN);
-        parameterMap.put("medicationDirectionYN", medicationDirectionYN);
-        parameterMap.put("telecom", telecom);
-        parameterMap.put("type", type);
+        parameterMap.put("identity", identity);
+        parameterMap.put("inquiryType", "0");
+        parameterMap.put("type", "1");
+        parameterMap.put("telecom",  telecom);
+        parameterMap.put("timeOut", "270");
 
         return parameterMap;
     }
