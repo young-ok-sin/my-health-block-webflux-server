@@ -14,6 +14,7 @@ import com.example.myhealthblock.question.dto.QuestionDTO;
 import com.example.myhealthblock.question.dto.QuestionTitleDTO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import lombok.RequiredArgsConstructor;
@@ -28,15 +29,15 @@ public class QuestionController {
 
     @Operation(summary = "질문 등록", description = "질문 등록")
     @PostMapping("/v1/question/enroll")
-    public ResponseResult enroll(@RequestBody RequestQuestionEnroll body) {
+    public ResponseEntity<ResponseResult> enroll(@RequestBody RequestQuestionEnroll body) {
         ResponseResult response = new ResponseResult();
         response.setResult(questionService.enroll(body));
-        return response;
+        return ResponseEntity.ok(response);
     }
 
     @Operation(summary = "질문들 조회", description = "질문들 내용까지 함께 조회")
     @GetMapping("/v1/question")
-    public ResponseQuestions getQuestions(@RequestParam(required = false) Category category, @RequestParam(required = false) String userId, @RequestParam(required = false) String opinionUserId) {
+    public ResponseEntity<ResponseQuestions> getQuestions(@RequestParam(required = false) Category category, @RequestParam(required = false) String userId, @RequestParam(required = false) String opinionUserId) {
         ResponseQuestions response  = new ResponseQuestions();
         QuestionDTO[] list = null;
         if (userId != null) {
@@ -49,36 +50,36 @@ public class QuestionController {
             list = questionService.getQuestionsWithDetail();
         }
         response.setQuestions(list);
-        return response;
+        return ResponseEntity.ok(response);
     }
 
     @Operation(summary = "질문 수정", description = "특정 데이터만 수정")
     @PatchMapping({"/v1/question", "/test-0/question"})
-    public ResponseResult update(@RequestBody RequestQuestionUpdate body) {
-        return new ResponseResult(questionService.update(body.getQuestionId(), body.getTitle(), body.getSymptom(), body.getContent()));
+    public ResponseEntity<ResponseResult> update(@RequestBody RequestQuestionUpdate body) {
+        return ResponseEntity.ok(new ResponseResult(questionService.update(body.getQuestionId(), body.getTitle(), body.getSymptom(), body.getContent())));
     }
 
     @Operation(summary = "질문 삭제", description = "질문 삭제 <br>{questionId}는 식별자")
     @DeleteMapping({"/v1/question/{questionId}", "/test-0/question/{questionId}"})
-    public ResponseResult delete(@PathVariable Integer questionId) {
-        return new ResponseResult(questionService.delete(questionId));
+    public ResponseEntity<ResponseResult> delete(@PathVariable Integer questionId) {
+        return ResponseEntity.ok(new ResponseResult(questionService.delete(questionId)));
     }
 
     @Operation(summary = "질문 목록 조회", description = "질문 식별자와 제목으로 목록 조회 <br>catetory는 게시판 카테고리<br>userId는 회원가입 아이디")
     @GetMapping({"/v1/question/list", "/test-1/question/list"})
-    public ResponseQuestionList getTitles(@RequestParam(required = false) Category category, @RequestParam(required = false) String userId) {
+    public ResponseEntity<ResponseQuestionList> getTitles(@RequestParam(required = false) Category category, @RequestParam(required = false) String userId) {
         QuestionTitleDTO[] list = null;
         if (userId != null) {
             list = questionService.getQuestions(userId);
         } else if (category != null){
             list = questionService.getQuestions(category);
         }
-        return new ResponseQuestionList(list);
+        return ResponseEntity.ok(new ResponseQuestionList(list));
     }
 
     @Operation(summary = "질문 조회", description = "하나의 질문 정보 조회 <br>{questionId}는 식별자 <br>질문 목록에서 선택한 하나의 질문 내용 조회")
     @GetMapping({"/v1/question/{questionId}", "/test-0/question/{questionId}"})
-    public ResponseQuestion get(@PathVariable Integer questionId) {
-        return new ResponseQuestion(questionService.getQuestion(questionId));
+    public ResponseEntity<ResponseQuestion> get(@PathVariable Integer questionId) {
+        return ResponseEntity.ok(new ResponseQuestion(questionService.getQuestion(questionId)));
     }
 }
