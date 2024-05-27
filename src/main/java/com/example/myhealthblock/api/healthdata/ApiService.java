@@ -1,10 +1,10 @@
 package com.example.myhealthblock.api.healthdata;
 
-import com.example.myhealthblock.api.healthdata.dto.*;
+import com.example.myhealthblock.api.healthdata.dto.request.*;
+import com.example.myhealthblock.api.healthdata.dto.response.HealthCheckupResponseDTO;
+import com.example.myhealthblock.api.healthdata.dto.response.TreatmentInfoResponseDTO;
 import org.springframework.stereotype.Service;
 import lombok.RequiredArgsConstructor;
-
-import java.util.Map;
 
 @RequiredArgsConstructor
 @Service
@@ -23,15 +23,15 @@ public class ApiService {
         return apiOutport.requestHealthCheckupResult(dto.getHashMap());
     }
 
-    public Map<String, Object> requestMedicalHistorySecond(MedicalHistorySecondRequestDTO dto) {
-        return apiOutport.requestMedicalHistorySecond(dto.getHashMap());
+//    public Map<String, Object> requestMedicalHistorySecond(MedicalHistorySecondRequestDTO dto) {
+//        return apiOutport.requestMedicalHistorySecond(dto.getHashMap());
+//    }
+
+    public TreatmentInfoResponseDTO requestCertificationTreatmentInformation(TreatmentInfoSecondRequestDTO dto) {
+        return apiOutport.requestCertificationTreatmentInformation(dto.getHashMap());
     }
 
-    public Map<String, Object> requestTreatmentInformationSecond(TreatmentInfoSecondRequestDTO dto) {
-        return apiOutport.requestTreatmentInformationSecond(dto.getHashMap());
-    }
-
-    public Map<String, Object> requestHealthCheckupResultSecond(HealthCheckupSecondRequestDTO dto) {
-        return apiOutport.requestHealthCheckupResultSecond(dto.getHashMap());
+    public HealthCheckupResponseDTO requestCertificationHealthCheckupResult(HealthCheckupSecondRequestDTO dto) {
+        return apiOutport.requestCertificationHealthCheckupResult(dto.getHashMap());
     }
 }

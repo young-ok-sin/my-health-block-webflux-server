@@ -1,16 +1,16 @@
 package com.example.myhealthblock.api.healthdata;
 
+import com.example.myhealthblock.api.healthdata.dto.request.*;
+import com.example.myhealthblock.api.healthdata.dto.response.HealthCheckupResponseDTO;
+import com.example.myhealthblock.api.healthdata.dto.response.TreatmentInfoResponseDTO;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import com.example.myhealthblock.api.healthdata.dto.*;
 
 import lombok.RequiredArgsConstructor;
-
-import java.util.Map;
 
 @RequiredArgsConstructor
 @RestController
@@ -87,41 +87,34 @@ public class ApiController {
         }
     }
 
-    @PostMapping("/v1/medical-api/medical-history/second-request")
-    public Map<String, Object> requestMedicalHistorySecond(@RequestBody MedicalHistorySecondRequestDTO body) {
-        if (savedJti != null && savedTwoWayTimestamp != null && savedTwoWayTimestamp > 0) {
-            body.setJti(savedJti);
-            body.setTwoWayTimestamp(savedTwoWayTimestamp);
-        } else {
-            System.out.println("Invalid JTI or TwoWayTimestamp");
-        }
-
-        Map<String, Object> response = apiService.requestMedicalHistorySecond(body);
-        System.out.println(apiService.requestMedicalHistorySecond(body));
-
-        return response;
-    }
-
-
+//    @PostMapping("/v1/medical-api/medical-history/second-request")
+//    public Map<String, Object> requestMedicalHistorySecond(@RequestBody MedicalHistorySecondRequestDTO body) {
+//        if (savedJti != null && savedTwoWayTimestamp != null && savedTwoWayTimestamp > 0) {
+//            body.setJti(savedJti);
+//            body.setTwoWayTimestamp(savedTwoWayTimestamp);
+//        } else {
+//            System.out.println("Invalid JTI or TwoWayTimestamp");
+//        }
+//
+//        Map<String, Object> response = apiService.requestMedicalHistorySecond(body);
+//        System.out.println(apiService.requestMedicalHistorySecond(body));
+//
+//        return response;
+//    }
     @PostMapping("/v1/medical-api/treatment-information/second-request")
-    public Map<String, Object> requestTreatmentInformationSecond(@RequestBody TreatmentInfoSecondRequestDTO body) {
+    public TreatmentInfoResponseDTO requestCertificationTreatmentInformation(@RequestBody TreatmentInfoSecondRequestDTO body) {
         body.setJti(savedJti);
         body.setTwoWayTimestamp(savedTwoWayTimestamp);
 
-        Map<String, Object> response = apiService.requestTreatmentInformationSecond(body);
-        System.out.println(apiService.requestTreatmentInformationSecond(body));
-
-        return response;
+        return apiService.requestCertificationTreatmentInformation(body);
     }
 
     @PostMapping("/v1/medical-api/health-checkup-result/second-request")
-    public Map<String, Object> requestHealthCheckupResultSecond(@RequestBody HealthCheckupSecondRequestDTO body) {
+    public HealthCheckupResponseDTO requestCertificationHealthCheckupResult(@RequestBody HealthCheckupSecondRequestDTO body) {
         body.setJti(savedJti);
         body.setTwoWayTimestamp(savedTwoWayTimestamp);
 
-        Map<String, Object> response = apiService.requestHealthCheckupResultSecond(body);
-        System.out.println(apiService.requestHealthCheckupResultSecond(body));
-
-        return response;
+        return apiService.requestCertificationHealthCheckupResult(body);
     }
+
 }

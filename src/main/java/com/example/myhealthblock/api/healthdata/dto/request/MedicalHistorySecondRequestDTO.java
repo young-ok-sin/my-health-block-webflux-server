@@ -1,4 +1,4 @@
-package com.example.myhealthblock.api.healthdata.dto;
+package com.example.myhealthblock.api.healthdata.dto.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -31,16 +31,16 @@ public class MedicalHistorySecondRequestDTO {
     public HashMap<String, Object> getHashMap() {
         HashMap<String, Object> parameterMap = new HashMap<String, Object>();
 
-        parameterMap.put("organization", organization);
-        parameterMap.put("loginType", loginType);
+        parameterMap.put("organization", "0002");
+        parameterMap.put("loginType", "5");
         parameterMap.put("identity", identity);
         parameterMap.put("userName", userName);
-        parameterMap.put("loginTypeLevel", loginTypeLevel);
+        parameterMap.put("loginTypeLevel", "1");
         parameterMap.put("phoneNo", phoneNo);
         parameterMap.put("telecom", telecom);
-        parameterMap.put("timeOut", timeOut);
-        parameterMap.put("drugImageYN", drugImageYN);
-        parameterMap.put("medicationDirectionYN", medicationDirectionYN);
+        parameterMap.put("timeOut", "270");
+        parameterMap.put("drugImageYN", "1");
+        parameterMap.put("medicationDirectionYN", "1");
 
         parameterMap.put("simpleAuth", "1");
         parameterMap.put("is2Way", true);

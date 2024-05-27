@@ -1,11 +1,12 @@
 package com.example.myhealthblock.api.healthdata.specific;
 
+import com.example.myhealthblock.api.healthdata.dto.response.HealthCheckupResponseDTO;
+import com.example.myhealthblock.api.healthdata.dto.response.TreatmentInfoResponseDTO;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.util.HashMap;
-import java.util.Map;
 
 @Getter
 @Setter
@@ -47,31 +48,31 @@ public class RealApi implements Api{
         return result;
     }
 
+//    @Override
+//    public Map<String, Object> requestCertificationMedicalHistory(HashMap<String, Object> parameterMap) {
+//        return requestCertification(MEDICAL_HISTORY, parameterMap);
+//    }
+
     @Override
-    public Map<String, Object> requestCertificationMedicalHistory(HashMap<String, Object> parameterMap) {
-        return requestCertification(MEDICAL_HISTORY, parameterMap);
+    public TreatmentInfoResponseDTO requestCertificationTreatmentInformation(HashMap<String, Object> parameterMap) {
+        return requestCertification(TREATMENT_INFORMATION, parameterMap, TreatmentInfoResponseDTO.class);
     }
 
     @Override
-    public Map<String, Object> requestCertificationTreatmentInformation(HashMap<String, Object> parameterMap) {
-        return requestCertification(TREATMENT_INFORMATION, parameterMap);
+    public HealthCheckupResponseDTO requestCertificationHealthCheckupResult(HashMap<String, Object> parameterMap) {
+        return requestCertification(HEALTH_CHECKUP_RESULT, parameterMap, HealthCheckupResponseDTO.class);
     }
 
-    @Override
-    public Map<String, Object> requestCertificationHealthCheckupResult(HashMap<String, Object> parameterMap) {
-        return requestCertification(HEALTH_CHECKUP_RESULT, parameterMap);
-    }
-
-    private Map<String, Object> requestCertification(String url, HashMap<String, Object> data) {
+    private <T> T requestCertification(String url, HashMap<String, Object> data, Class<T> responseType) {
         String result = "";
         ObjectMapper objectMapper = new ObjectMapper();
-        Map<String, Object> responseMap = new HashMap<>();
+        T responseDTO = null;
         try {
             result = codef.requestCertification(url, EasyCodefServiceType.DEMO, data);
-            responseMap = objectMapper.readValue(result, Map.class);
+            responseDTO = objectMapper.readValue(result, responseType);
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-        return responseMap;
+        return responseDTO;
     }
 }
