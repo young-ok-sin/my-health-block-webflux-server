@@ -3,6 +3,7 @@ package com.example.myhealthblock.api.healthdata;
 import java.util.HashMap;
 
 import com.example.myhealthblock.api.healthdata.dto.response.HealthCheckupResponseDTO;
+import com.example.myhealthblock.api.healthdata.dto.response.MedicalHistoryResponseDTO;
 import com.example.myhealthblock.api.healthdata.dto.response.TreatmentInfoResponseDTO;
 import com.example.myhealthblock.api.healthdata.specific.*;
 
@@ -22,8 +23,8 @@ public class ApiAdapter implements ApiOutport{
     @Override
     public String requestHealthCheckupResult(HashMap<String, Object> data) { return api.requestHealthCheckupResult(data); }
 
-//    @Override
-//    public Map<String, Object> requestMedicalHistorySecond(HashMap<String, Object> data) { return api.requestCertificationMedicalHistory(data); }
+    @Override
+    public MedicalHistoryResponseDTO requestCertificationMedicalHistory(HashMap<String, Object> data) { return api.requestCertificationMedicalHistory(data); }
     @Override
     public TreatmentInfoResponseDTO requestCertificationTreatmentInformation(HashMap<String, Object> data) {
         return api.requestCertificationTreatmentInformation(data);

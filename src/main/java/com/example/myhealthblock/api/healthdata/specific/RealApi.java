@@ -1,6 +1,7 @@
 package com.example.myhealthblock.api.healthdata.specific;
 
 import com.example.myhealthblock.api.healthdata.dto.response.HealthCheckupResponseDTO;
+import com.example.myhealthblock.api.healthdata.dto.response.MedicalHistoryResponseDTO;
 import com.example.myhealthblock.api.healthdata.dto.response.TreatmentInfoResponseDTO;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.Getter;
@@ -48,10 +49,10 @@ public class RealApi implements Api{
         return result;
     }
 
-//    @Override
-//    public Map<String, Object> requestCertificationMedicalHistory(HashMap<String, Object> parameterMap) {
-//        return requestCertification(MEDICAL_HISTORY, parameterMap);
-//    }
+    @Override
+    public MedicalHistoryResponseDTO requestCertificationMedicalHistory(HashMap<String, Object> parameterMap) {
+        return requestCertification(MEDICAL_HISTORY, parameterMap, MedicalHistoryResponseDTO.class);
+    }
 
     @Override
     public TreatmentInfoResponseDTO requestCertificationTreatmentInformation(HashMap<String, Object> parameterMap) {
