@@ -46,8 +46,8 @@ public class HealthCheckupSecondRequestDTO {
         parameterMap.put("is2Way", true);
 
         HashMap<String, Object> twoWayInfo = new HashMap<String, Object>();
-        twoWayInfo.put("jobIndex", 0);
-        twoWayInfo.put("threadIndex", 0);
+        twoWayInfo.put("jobIndex", jobIndex);
+        twoWayInfo.put("threadIndex", threadIndex);
         twoWayInfo.put("jti", jti);
         twoWayInfo.put("twoWayTimestamp", twoWayTimestamp);
         parameterMap.put("twoWayInfo", twoWayInfo);

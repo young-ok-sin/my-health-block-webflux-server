@@ -7,7 +7,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -17,5 +16,5 @@ import java.util.List;
 public class TreatmentInfoResponseDTO {
     private ResultDTO resultDTO;
     @JsonProperty("data")
-    private List<TreatmentInfoData> data;
+    private TreatmentInfoData data;
 }

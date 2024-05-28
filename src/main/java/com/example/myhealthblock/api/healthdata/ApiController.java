@@ -21,6 +21,9 @@ public class ApiController {
     private final ApiService apiService;
     private String savedJti;
     private Long savedTwoWayTimestamp;
+    private int savedJobIndex;
+    private int savedThreadIndex;
+
 
     @PostMapping("/v1/medical-api/medical-history/first-request")
     public ResponseEntity<String> requestMedicalHistory(@RequestBody MedicalHistoryFirstRequestDTO body) {
@@ -28,6 +31,9 @@ public class ApiController {
             String response = apiService.requestMedicalHistory(body);
             savedJti = extractJtiFromResponse(response);
             savedTwoWayTimestamp = extractTwoWayTimestampFromResponse(response);
+            savedJobIndex = extractJobIndexFromResponse(response);
+            savedThreadIndex = extractThreadIndexFromResponse(response);
+
             System.out.println(response);
             System.out.println("medical api 1차 호출");
             return new ResponseEntity<>("medical api 1차 인증 요청", HttpStatus.OK);
@@ -43,6 +49,9 @@ public class ApiController {
             String response = apiService.requestTreatmentInformation(body);
             savedJti = extractJtiFromResponse(response);
             savedTwoWayTimestamp = extractTwoWayTimestampFromResponse(response);
+            savedJobIndex = extractJobIndexFromResponse(response);
+            savedThreadIndex = extractThreadIndexFromResponse(response);
+
             System.out.println(response);
             System.out.println("treatment api 1차 호출");
             return new ResponseEntity<>("treatment api 1차 인증 요청", HttpStatus.OK);
@@ -58,6 +67,9 @@ public class ApiController {
             String response = apiService.requestHealthCheckupResult(body);
             savedJti = extractJtiFromResponse(response);
             savedTwoWayTimestamp = extractTwoWayTimestampFromResponse(response);
+            savedJobIndex = extractJobIndexFromResponse(response);
+            savedThreadIndex = extractThreadIndexFromResponse(response);
+
             System.out.println(response);
             System.out.println("healthCheckup api 1차 호출");
             return new ResponseEntity<>("healthCheckup api 1차 인증 요청", HttpStatus.OK);
@@ -90,6 +102,29 @@ public class ApiController {
             return 0L;
         }
     }
+    private int extractJobIndexFromResponse(String result) {
+        try {
+            JSONObject json = new JSONObject(result);
+            JSONObject data = json.getJSONObject("data");
+            int jobIndex = data.getInt("jobIndex");
+            return jobIndex;
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return 0;
+        }
+    }
+    private int extractThreadIndexFromResponse(String result) {
+        try {
+            JSONObject json = new JSONObject(result);
+            JSONObject data = json.getJSONObject("data");
+            int threadIndex = data.getInt("threadIndex");
+            return threadIndex;
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return 0;
+        }
+    }
+
     @PostMapping("/v1/medical-api/medical-history/second-request")
     public ResponseEntity<MedicalHistoryResponseDTO> requestMedicalHistorySecond(@RequestBody MedicalHistorySecondRequestDTO body) {
         try {
@@ -98,6 +133,9 @@ public class ApiController {
             }
             body.setJti(savedJti);
             body.setTwoWayTimestamp(savedTwoWayTimestamp);
+            body.setJobIndex(savedJobIndex);
+            body.setThreadIndex(savedThreadIndex);
+
             System.out.println("medical api 2차 호출");
             MedicalHistoryResponseDTO response = apiService.requestCertificationMedicalHistory(body);
 
@@ -119,6 +157,9 @@ public class ApiController {
             }
             body.setJti(savedJti);
             body.setTwoWayTimestamp(savedTwoWayTimestamp);
+            body.setJobIndex(savedJobIndex);
+            body.setThreadIndex(savedThreadIndex);
+
             System.out.println("treatment api 2차 호출");
             TreatmentInfoResponseDTO response = apiService.requestCertificationTreatmentInformation(body);
             return new ResponseEntity<>(response, HttpStatus.OK);
@@ -136,6 +177,9 @@ public class ApiController {
             }
             body.setJti(savedJti);
             body.setTwoWayTimestamp(savedTwoWayTimestamp);
+            body.setJobIndex(savedJobIndex);
+            body.setThreadIndex(savedThreadIndex);
+
             System.out.println("healthCheckup api 2차 호출");
             HealthCheckupResponseDTO response = apiService.requestCertificationHealthCheckupResult(body);
             return new ResponseEntity<>(response, HttpStatus.OK);
@@ -145,103 +189,3 @@ public class ApiController {
         }
     }
 }
-//    }
-//@RequiredArgsConstructor
-//@RestController
-//@RequestMapping("/api")
-//public class ApiController {
-//    private final ApiService apiService;
-//    private String savedJti;
-//    private Long savedTwoWayTimestamp;
-//    @PostMapping("/v1/medical-api/medical-history/first-request")
-//    public String requestMedicalHistory(@RequestBody MedicalHistoryFirstRequestDTO body) {
-//        String response = apiService.requestMedicalHistory(body);
-//
-//        savedJti = extractJtiFromResponse(response);
-//        savedTwoWayTimestamp = extractTwoWayTimestampFromResponse(response);
-//
-//        System.out.println(response);
-//        System.out.println("medical api 1차 호출");
-//        return "medical api 1차 인증 요청";
-//    }
-//
-//    @PostMapping("/v1/medical-api/treatment-information/first-request")
-//    public String requestTreatmentInformation(@RequestBody TreatmentInfoFirstRequestDTO body) {
-//        String response = apiService.requestTreatmentInformation(body);
-//
-//        savedJti = extractJtiFromResponse(response);
-//        savedTwoWayTimestamp = extractTwoWayTimestampFromResponse(response);
-//
-//        System.out.println(response);
-//        System.out.println("treatment api 1차 호출");
-//        return "treatment api 1차 인증 요청";
-//    }
-//
-//    @PostMapping("/v1/medical-api/health-checkup-result/first-request")
-//    public String requestHealthCheckupResult(@RequestBody HealthCheckupFirstRequestDTO body) {
-//        String response = apiService.requestHealthCheckupResult(body);
-//
-//        savedJti = extractJtiFromResponse(response);
-//        savedTwoWayTimestamp = extractTwoWayTimestampFromResponse(response);
-//
-//        System.out.println(response);
-//        System.out.println("healthCheckup api 1차 호출");
-//        return "healthCheckup api 1차 인증 요청";
-//    }
-//    private String extractJtiFromResponse(String result) {
-//        try {
-//            JSONObject json = new JSONObject(result);
-//            JSONObject data = json.getJSONObject("data");
-//            String jti = data.getString("jti");
-//
-//            if (jti != null && !jti.isEmpty()) {
-//                return jti;
-//            } else {
-//                return "defaultJti";
-//            }
-//        } catch (JSONException e) {
-//            e.printStackTrace();
-//            return "defaultJti";
-//        }
-//    }
-//    private Long extractTwoWayTimestampFromResponse(String result) {
-//        try {
-//            JSONObject json = new JSONObject(result);
-//            JSONObject data = json.getJSONObject("data");
-//            Long twoWayTimestamp = data.getLong("twoWayTimestamp");
-//
-//            if (twoWayTimestamp > 0) {
-//                return twoWayTimestamp;
-//            } else {
-//                return 0L;
-//            }
-//        } catch (JSONException e) {
-//            e.printStackTrace();
-//            return 0L;
-//        }
-//    }
-//
-//    @PostMapping("/v1/medical-api/medical-history/second-request")
-//    public MedicalHistoryResponseDTO requestMedicalHistorySecond(@RequestBody MedicalHistorySecondRequestDTO body) {
-//        body.setJti(savedJti);
-//        body.setTwoWayTimestamp(savedTwoWayTimestamp);
-//        System.out.println("medical api 2차 호출");
-//        return apiService.requestCertificationMedicalHistory(body);
-//    }
-//    @PostMapping("/v1/medical-api/treatment-information/second-request")
-//    public TreatmentInfoResponseDTO requestCertificationTreatmentInformation(@RequestBody TreatmentInfoSecondRequestDTO body) {
-//        body.setJti(savedJti);
-//        body.setTwoWayTimestamp(savedTwoWayTimestamp);
-//        System.out.println("treatment api 2차 호출");
-//        return apiService.requestCertificationTreatmentInformation(body);
-//    }
-//
-//    @PostMapping("/v1/medical-api/health-checkup-result/second-request")
-//    public HealthCheckupResponseDTO requestCertificationHealthCheckupResult(@RequestBody HealthCheckupSecondRequestDTO body) {
-//        body.setJti(savedJti);
-//        body.setTwoWayTimestamp(savedTwoWayTimestamp);
-//        System.out.println("healthCheckup api 2차 호출");
-//        return apiService.requestCertificationHealthCheckupResult(body);
-//    }
-//
-//}
