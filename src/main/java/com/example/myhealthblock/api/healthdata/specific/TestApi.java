@@ -1,6 +1,7 @@
 package com.example.myhealthblock.api.healthdata.specific;
 
 import com.example.myhealthblock.api.healthdata.dto.response.HealthCheckupResponseDTO;
+import com.example.myhealthblock.api.healthdata.dto.response.MedicalHistoryResponseDTO;
 import com.example.myhealthblock.api.healthdata.dto.response.TreatmentInfoResponseDTO;
 
 import java.util.HashMap;
@@ -21,10 +22,11 @@ public class TestApi implements Api{
         return "requestHealthCheckupResult test api";
     }
 
-//    @Override
-//    public Map<String, Object> requestCertificationMedicalHistory(HashMap<String, Object> parameterMap) {
-//        return new HashMap<>();
-//    }
+    @Override
+    public MedicalHistoryResponseDTO requestCertificationMedicalHistory(HashMap<String, Object> parameterMap) {
+        MedicalHistoryResponseDTO medicalHistoryResponseDTO = new MedicalHistoryResponseDTO();
+        return medicalHistoryResponseDTO;
+    }
 
     @Override
     public TreatmentInfoResponseDTO requestCertificationTreatmentInformation(HashMap<String, Object> parameterMap) {

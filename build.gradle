@@ -40,7 +40,14 @@ dependencies {
 //	testImplementation 'org.junit.jupiter:junit-jupiter'
 //	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }
-
+jar{
+	manifest{
+		attributes 'Main-Class': 'com.example.myhealthblock.MyhealthblockApplication'
+	}
+}
+bootJar {
+	jar.enabled = true
+}
 tasks.named('bootBuildImage') {
 	builder = 'paketobuildpacks/builder-jammy-base:latest'
 }
