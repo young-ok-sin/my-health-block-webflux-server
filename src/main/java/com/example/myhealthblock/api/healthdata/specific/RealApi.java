@@ -55,12 +55,12 @@ public class RealApi implements Api{
     }
 
     @Override
-    public TreatmentInfoResponseDTO requestCertificationTreatmentInformation(HashMap<String, Object> parameterMap) {
+    public TreatmentInfoResponseDTO<?> requestCertificationTreatmentInformation(HashMap<String, Object> parameterMap) {
         return requestCertification(TREATMENT_INFORMATION, parameterMap, TreatmentInfoResponseDTO.class);
     }
 
     @Override
-    public HealthCheckupResponseDTO requestCertificationHealthCheckupResult(HashMap<String, Object> parameterMap) {
+    public HealthCheckupResponseDTO<?> requestCertificationHealthCheckupResult(HashMap<String, Object> parameterMap) {
         return requestCertification(HEALTH_CHECKUP_RESULT, parameterMap, HealthCheckupResponseDTO.class);
     }
 

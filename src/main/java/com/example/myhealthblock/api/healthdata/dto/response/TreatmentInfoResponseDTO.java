@@ -13,8 +13,8 @@ import lombok.Setter;
 @Getter
 @Setter
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class TreatmentInfoResponseDTO {
+public class TreatmentInfoResponseDTO<T> {
     private ResultDTO resultDTO;
     @JsonProperty("data")
-    private TreatmentInfoData data;
+    private T data;
 }

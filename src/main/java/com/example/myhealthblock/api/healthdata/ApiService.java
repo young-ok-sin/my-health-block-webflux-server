@@ -28,11 +28,11 @@ public class ApiService {
         return apiOutport.requestCertificationMedicalHistory(dto.getHashMap());
     }
 
-    public TreatmentInfoResponseDTO requestCertificationTreatmentInformation(TreatmentInfoSecondRequestDTO dto) {
+    public TreatmentInfoResponseDTO<?> requestCertificationTreatmentInformation(TreatmentInfoSecondRequestDTO dto) {
         return apiOutport.requestCertificationTreatmentInformation(dto.getHashMap());
     }
 
-    public HealthCheckupResponseDTO requestCertificationHealthCheckupResult(HealthCheckupSecondRequestDTO dto) {
+    public HealthCheckupResponseDTO<?> requestCertificationHealthCheckupResult(HealthCheckupSecondRequestDTO dto) {
         return apiOutport.requestCertificationHealthCheckupResult(dto.getHashMap());
     }
 }
