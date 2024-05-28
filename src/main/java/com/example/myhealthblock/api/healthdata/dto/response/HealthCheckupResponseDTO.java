@@ -12,9 +12,9 @@ import lombok.Setter;
 @Getter
 @Setter
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class HealthCheckupResponseDTO {
+public class HealthCheckupResponseDTO<T> {
     @JsonProperty("result")
     private ResultDTO resultDTO;
     @JsonProperty("data")
-    private HealthCheckupData  data;
+    private T data;
 }

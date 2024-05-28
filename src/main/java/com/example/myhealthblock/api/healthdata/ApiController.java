@@ -150,7 +150,7 @@ public class ApiController {
     }
 
     @PostMapping("/v1/medical-api/treatment-information/second-request")
-    public ResponseEntity<TreatmentInfoResponseDTO> requestCertificationTreatmentInformation(@RequestBody TreatmentInfoSecondRequestDTO body) {
+    public ResponseEntity<TreatmentInfoResponseDTO<?>> requestCertificationTreatmentInformation(@RequestBody TreatmentInfoSecondRequestDTO body) {
         try {
             if (savedJti == null || savedTwoWayTimestamp == null) {
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -161,7 +161,7 @@ public class ApiController {
             body.setThreadIndex(savedThreadIndex);
 
             System.out.println("treatment api 2차 호출");
-            TreatmentInfoResponseDTO response = apiService.requestCertificationTreatmentInformation(body);
+            TreatmentInfoResponseDTO<?> response = apiService.requestCertificationTreatmentInformation(body);
             return new ResponseEntity<>(response, HttpStatus.OK);
         } catch (Exception e) {
             e.printStackTrace();
@@ -170,7 +170,7 @@ public class ApiController {
     }
 
     @PostMapping("/v1/medical-api/health-checkup-result/second-request")
-    public ResponseEntity<HealthCheckupResponseDTO> requestCertificationHealthCheckupResult(@RequestBody HealthCheckupSecondRequestDTO body) {
+    public ResponseEntity<HealthCheckupResponseDTO<?>> requestCertificationHealthCheckupResult(@RequestBody HealthCheckupSecondRequestDTO body) {
         try {
             if (savedJti == null || savedTwoWayTimestamp == null) {
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -181,7 +181,7 @@ public class ApiController {
             body.setThreadIndex(savedThreadIndex);
 
             System.out.println("healthCheckup api 2차 호출");
-            HealthCheckupResponseDTO response = apiService.requestCertificationHealthCheckupResult(body);
+            HealthCheckupResponseDTO<?> response = apiService.requestCertificationHealthCheckupResult(body);
             return new ResponseEntity<>(response, HttpStatus.OK);
         } catch (Exception e) {
             e.printStackTrace();
