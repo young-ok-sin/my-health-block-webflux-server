@@ -11,6 +11,6 @@ public interface ApiOutport {
     String requestTreatmentInformation(HashMap<String, Object> data);
     String requestHealthCheckupResult(HashMap<String, Object> data);
     MedicalHistoryResponseDTO requestCertificationMedicalHistory(HashMap<String, Object> data);
-    TreatmentInfoResponseDTO requestCertificationTreatmentInformation(HashMap<String, Object> parameterMap);
-    HealthCheckupResponseDTO requestCertificationHealthCheckupResult(HashMap<String, Object> parameterMap);
+    TreatmentInfoResponseDTO<?> requestCertificationTreatmentInformation(HashMap<String, Object> parameterMap);
+    HealthCheckupResponseDTO<?> requestCertificationHealthCheckupResult(HashMap<String, Object> parameterMap);
 }

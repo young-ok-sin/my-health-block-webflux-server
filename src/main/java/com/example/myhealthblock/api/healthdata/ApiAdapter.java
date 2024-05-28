@@ -26,12 +26,12 @@ public class ApiAdapter implements ApiOutport{
     @Override
     public MedicalHistoryResponseDTO requestCertificationMedicalHistory(HashMap<String, Object> data) { return api.requestCertificationMedicalHistory(data); }
     @Override
-    public TreatmentInfoResponseDTO requestCertificationTreatmentInformation(HashMap<String, Object> data) {
+    public TreatmentInfoResponseDTO<?> requestCertificationTreatmentInformation(HashMap<String, Object> data) {
         return api.requestCertificationTreatmentInformation(data);
     }
 
     @Override
-    public HealthCheckupResponseDTO requestCertificationHealthCheckupResult(HashMap<String, Object> data) {
+    public HealthCheckupResponseDTO<?> requestCertificationHealthCheckupResult(HashMap<String, Object> data) {
         return api.requestCertificationHealthCheckupResult(data);
     }
 }
