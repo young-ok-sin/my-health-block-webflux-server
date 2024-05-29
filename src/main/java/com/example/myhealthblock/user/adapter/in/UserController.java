@@ -23,11 +23,11 @@ import lombok.RequiredArgsConstructor;
 public class UserController {
     private final UserService userService;
 
-    @Operation(summary = "테스트용 회원가입", description = "특정 역할로 회원가입이 아닌 일반 회원가입 테스트")
-    @PostMapping("/test/sign-up")
-    public String signUp(@RequestBody RequestUserSignUp body) {
-        return userService.signUp(body);
-    }
+//    @Operation(summary = "테스트용 회원가입", description = "특정 역할로 회원가입이 아닌 일반 회원가입 테스트")
+//    @PostMapping("/test/sign-up")
+//    public String signUp(@RequestBody RequestUserSignUp body) {
+//        return userService.signUp(body);
+//    }
 
     @Operation(summary = "로그인", description = "로그인 후 특정 역할 반환")
     @PostMapping("/v1/sign-in")

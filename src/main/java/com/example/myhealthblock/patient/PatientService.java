@@ -17,17 +17,16 @@ public class PatientService implements GetPatientEntityDTO, GetPatientUrgentData
     private final PatientAdapter outport;
     private final UserService userInport;
 
-    public String signUp(RequestPatientSignUp dto){
+    public boolean signUp(RequestPatientSignUp dto){
         RequestUserSignUp user = new RequestUserSignUp();
         user.setId(dto.getId());
         user.setPw(dto.getPw());
         user.setRole(dto.getRole());
 
-        userInport.signUp(user);
-
-        boolean result = outport.create(dto.getId());
-
-        return result ? "success" : "fail";
+        if (userInport.signUp(user)){
+            return outport.create(dto.getId());
+        }
+        return false;
     }
 
     public String enrollUrgentData(RequestPatientEnrollUrgentData dto){

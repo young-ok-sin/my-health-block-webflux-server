@@ -10,6 +10,7 @@ import com.example.myhealthblock.patient.adapter.in.response.ResponseResult;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,8 +26,18 @@ public class PatientController {
     @PostMapping("/v1/patient/sign-up")
     public ResponseEntity<ResponseResult> signUp(@RequestBody RequestPatientSignUp body){
         ResponseResult response = new ResponseResult();
-        response.setResult(patientService.signUp(body));
-        return ResponseEntity.ok(response);
+        try {
+            if (patientService.signUp(body)) {
+                response.setResult("success");
+                return ResponseEntity.ok(response);
+            } else {
+                response.setResult("confilct: A user with this ID already exists.");
+                return ResponseEntity.status(HttpStatus.CONFLICT).body(response);
+            }
+        } catch (Exception e) {
+            response.setResult("error: An unexpected error occurred: " + e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
+        }
     }
 
     @Operation(summary = "긴급 데이터 등록", description = "응급 상황 대비 긴급 데이터 등록")

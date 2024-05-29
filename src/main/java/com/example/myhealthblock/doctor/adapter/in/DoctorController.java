@@ -11,6 +11,7 @@ import com.example.myhealthblock.doctor.adapter.in.response.ResponseResult;
 import com.example.myhealthblock.doctor.dto.DoctorProfileDTO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,8 +29,18 @@ public class DoctorController {
     @PostMapping("/v1/doctor/sign-up")
     public ResponseEntity<ResponseResult> signUp(@RequestBody RequestDoctorSignUp body) {
         ResponseResult response = new ResponseResult();
-        response.setResult(doctorService.signUp(body));
-        return ResponseEntity.ok(response);
+        try {
+            if (doctorService.signUp(body)){
+                response.setResult("success");
+                return ResponseEntity.ok(response);
+            } else {
+                response.setResult("confilct: A user with this ID already exists.");
+                return ResponseEntity.status(HttpStatus.CONFLICT).body(response);
+            }
+        } catch (Exception e) {
+            response.setResult("error: An unexpected error occurred: " + e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
+        }
     }
 
     @Operation(summary = "의사 - 환자 긴급 데이터 열람", description = "열람 이유 입력")
