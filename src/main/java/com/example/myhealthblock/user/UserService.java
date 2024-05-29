@@ -15,8 +15,11 @@ import lombok.RequiredArgsConstructor;
 public class UserService implements GetUserEntityDTO{
     private final UserAdapter outport;
 
-    public String signUp(RequestUserSignUp dto) {
-        return outport.create(dto.getId(), dto.getPw(), dto.getRole()) ? "success" : "fail";
+    public boolean signUp(RequestUserSignUp dto) {
+        User user = outport.getUser(dto.getId());
+        if (user == null)
+            return outport.create(dto.getId(), dto.getPw(), dto.getRole());
+        return false;
     }
 
 
