@@ -33,6 +33,7 @@ dependencies {
 	implementation 'mysql:mysql-connector-java:8.0.33'
 	implementation 'org.springframework.boot:spring-boot-starter-aop'
 	implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.2.0'
+	implementation 'com.h2database:h2'
 //	implementation 'io.springfox:springfox-boot-starter:3.0.0'
 //	implementation 'io.springfox:springfox-swagger-ui:3.0.0'
 //	implementation 'io.springfox:springfox-swagger2:2.9.2'
