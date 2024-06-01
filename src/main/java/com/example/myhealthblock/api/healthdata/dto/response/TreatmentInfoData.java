@@ -25,4 +25,25 @@ public class TreatmentInfoData {
     private String resTreatType;
     private String resTreatStartDate;
     private String resHospitalName;
+
+    private String toString (List<MedicationDetailDTO> list) {
+        String data = "";
+        for (MedicationDetailDTO e: list) {
+            data += e.toString();
+        }
+        return data;
+    }
+
+    @Override
+    public String toString() {
+        return resHospitalName;
+//                resType
+//                + toString(resMediDetailList)
+//                + resMedicationCnt
+//                + resPrescribeCnt
+//                + resVisitDays
+//                + resTreatType
+//                + resTreatStartDate
+//                + resHospitalName;
+    }
 }

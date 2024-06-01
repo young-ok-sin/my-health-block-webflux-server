@@ -14,4 +14,9 @@ public class ResultDTO {
     private String extraMessage;
     private String message;
     private String transactionId;
+
+    @Override
+    public String toString(){
+        return code + extraMessage + message + transactionId;
+    }
 }

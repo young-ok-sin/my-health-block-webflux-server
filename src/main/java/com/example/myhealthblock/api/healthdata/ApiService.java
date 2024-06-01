@@ -1,9 +1,6 @@
 package com.example.myhealthblock.api.healthdata;
 
 import com.example.myhealthblock.api.healthdata.dto.request.*;
-import com.example.myhealthblock.api.healthdata.dto.response.HealthCheckupResponseDTO;
-import com.example.myhealthblock.api.healthdata.dto.response.MedicalHistoryResponseDTO;
-import com.example.myhealthblock.api.healthdata.dto.response.TreatmentInfoResponseDTO;
 import org.springframework.stereotype.Service;
 import lombok.RequiredArgsConstructor;
 
@@ -24,15 +21,15 @@ public class ApiService {
         return apiOutport.requestHealthCheckupResult(dto.getHashMap());
     }
 
-    public MedicalHistoryResponseDTO requestCertificationMedicalHistory(MedicalHistorySecondRequestDTO dto) {
+    public String requestCertificationMedicalHistory(MedicalHistorySecondRequestDTO dto) {
         return apiOutport.requestCertificationMedicalHistory(dto.getHashMap());
     }
 
-    public TreatmentInfoResponseDTO<?> requestCertificationTreatmentInformation(TreatmentInfoSecondRequestDTO dto) {
+    public String requestCertificationTreatmentInformation(TreatmentInfoSecondRequestDTO dto) {
         return apiOutport.requestCertificationTreatmentInformation(dto.getHashMap());
     }
 
-    public HealthCheckupResponseDTO<?> requestCertificationHealthCheckupResult(HealthCheckupSecondRequestDTO dto) {
+    public String requestCertificationHealthCheckupResult(HealthCheckupSecondRequestDTO dto) {
         return apiOutport.requestCertificationHealthCheckupResult(dto.getHashMap());
     }
 }

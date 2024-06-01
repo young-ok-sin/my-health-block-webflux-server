@@ -1,9 +1,5 @@
 package com.example.myhealthblock.api.healthdata.specific;
 
-import com.example.myhealthblock.api.healthdata.dto.response.HealthCheckupResponseDTO;
-import com.example.myhealthblock.api.healthdata.dto.response.MedicalHistoryResponseDTO;
-import com.example.myhealthblock.api.healthdata.dto.response.TreatmentInfoResponseDTO;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -50,30 +46,27 @@ public class RealApi implements Api{
     }
 
     @Override
-    public MedicalHistoryResponseDTO requestCertificationMedicalHistory(HashMap<String, Object> parameterMap) {
-        return requestCertification(MEDICAL_HISTORY, parameterMap, MedicalHistoryResponseDTO.class);
+    public String requestCertificationMedicalHistory(HashMap<String, Object> parameterMap) {
+        return requestCertification(MEDICAL_HISTORY, parameterMap);
     }
 
     @Override
-    public TreatmentInfoResponseDTO<?> requestCertificationTreatmentInformation(HashMap<String, Object> parameterMap) {
-        return requestCertification(TREATMENT_INFORMATION, parameterMap, TreatmentInfoResponseDTO.class);
+    public String requestCertificationTreatmentInformation(HashMap<String, Object> parameterMap) {
+        return requestCertification(TREATMENT_INFORMATION, parameterMap);
     }
 
     @Override
-    public HealthCheckupResponseDTO<?> requestCertificationHealthCheckupResult(HashMap<String, Object> parameterMap) {
-        return requestCertification(HEALTH_CHECKUP_RESULT, parameterMap, HealthCheckupResponseDTO.class);
+    public String requestCertificationHealthCheckupResult(HashMap<String, Object> parameterMap) {
+        return requestCertification(HEALTH_CHECKUP_RESULT, parameterMap);
     }
 
-    private <T> T requestCertification(String url, HashMap<String, Object> data, Class<T> responseType) {
+    private String requestCertification(String url, HashMap<String, Object> data) {
         String result = "";
-        ObjectMapper objectMapper = new ObjectMapper();
-        T responseDTO = null;
         try {
             result = codef.requestCertification(url, EasyCodefServiceType.DEMO, data);
-            responseDTO = objectMapper.readValue(result, responseType);
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-        return responseDTO;
+        return result;
     }
 }
