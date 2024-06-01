@@ -1,6 +1,7 @@
 package com.example.myhealthblock.api.healthdata;
 
 import com.example.myhealthblock.api.healthdata.dto.request.*;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.*;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.json.JSONException;
@@ -11,6 +12,9 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+
+import java.util.HashMap;
+import java.util.Map;
 
 @RequiredArgsConstructor
 @RestController
@@ -143,7 +147,7 @@ public class ApiController {
     }
 
     @PostMapping("/v1/medical-api/treatment-information/second-request")
-    public ResponseEntity<ApiResponse> requestCertificationTreatmentInformation(@RequestBody TreatmentInfoSecondRequestDTO body) {
+    public ResponseEntity<Object> requestCertificationTreatmentInformation(@RequestBody TreatmentInfoSecondRequestDTO body) {
         try {
             if (savedJti == null || savedTwoWayTimestamp == null) {
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -167,9 +171,14 @@ public class ApiController {
 
             BlockchainClient blockchainClient = new BlockchainClient();
             String contract_address = blockchainClient.registerHash(savedHash).block();
-//            System.out.println(contract_address);
+            System.out.println(contract_address);
 
-            return new ResponseEntity<>(new ApiResponse(data, contract_address), HttpStatus.OK);
+            Map<String, Object> responseData = new ObjectMapper().readValue(data, Map.class);
+            Map<String, Object> responseMap = new HashMap<>();
+            responseMap.put("data", responseData);
+            responseMap.put("contract_address", contract_address);
+            return new ResponseEntity<>(responseMap, HttpStatus.OK);
+
         } catch (Exception e) {
             e.printStackTrace();
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -177,7 +186,7 @@ public class ApiController {
     }
 
     @PostMapping("/v1/medical-api/health-checkup-result/second-request")
-    public ResponseEntity<ApiResponse> requestCertificationHealthCheckupResult(@RequestBody HealthCheckupSecondRequestDTO body) {
+    public ResponseEntity<Object> requestCertificationHealthCheckupResult(@RequestBody HealthCheckupSecondRequestDTO body) {
         try {
             if (savedJti == null || savedTwoWayTimestamp == null) {
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -202,9 +211,13 @@ public class ApiController {
 
             BlockchainClient blockchainClient = new BlockchainClient();
             String contract_address = blockchainClient.registerHash(savedHash).block();
-//            System.out.println(contract_address);
+            System.out.println(contract_address);
 
-            return new ResponseEntity<>(new ApiResponse(data, contract_address), HttpStatus.OK);
+            Map<String, Object> responseData = new ObjectMapper().readValue(data, Map.class);
+            Map<String, Object> responseMap = new HashMap<>();
+            responseMap.put("data", responseData);
+            responseMap.put("contract_address", contract_address);
+            return new ResponseEntity<>(responseMap, HttpStatus.OK);
         } catch (Exception e) {
             e.printStackTrace();
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);

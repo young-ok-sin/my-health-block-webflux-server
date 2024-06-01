@@ -20,8 +20,8 @@ public class BlockchainClient {
         String contract_code = String.format("def store_hash():\n    return '%s'", data_hash);
 
         BlockchainTransactionRequestDTO requestDTO = new BlockchainTransactionRequestDTO();
-        requestDTO.setSender("sender");
-        requestDTO.setRecipient("receiver");
+        requestDTO.setSender("server");
+        requestDTO.setRecipient("blockChain_server");
         requestDTO.setAmount(0);
         requestDTO.setSmart_contract(new BlockchainTransactionRequestDTO.SmartContract(contract_code));
 
