@@ -18,14 +18,15 @@ public class DoctorService {
     private final PatientService patientInport;
 //    private final GetPatientUrgentData patientInport; DI 컨테이너 학습 후 적용
 
-    public String signUp(RequestDoctorSignUp dto) {
+    public boolean signUp(RequestDoctorSignUp dto) {
         RequestUserSignUp user = new RequestUserSignUp();
         user.setId(dto.getId());
         user.setPw(dto.getPw());
         user.setRole(dto.getRole());
-        userInport.signUp(user);
-        boolean result = outport.create(dto.getId(), dto.getName(), dto.getField(), dto.getHospital(), dto.getIntroduction());
-        return result ? "success" : "fail";
+        if (userInport.signUp(user)){
+            return outport.create(dto.getId(), dto.getName(), dto.getField(), dto.getHospital(), dto.getIntroduction());
+        }
+        return false;
     }
 
     public String getPatientUrgentData(RequestPatientUrgentData dto) {
