@@ -1,9 +1,9 @@
 package com.example.myhealthblock.api.healthdata;
 
 import com.example.myhealthblock.api.healthdata.dto.request.*;
-import com.example.myhealthblock.api.healthdata.dto.response.HealthCheckupResponseDTO;
-import com.example.myhealthblock.api.healthdata.dto.response.MedicalHistoryResponseDTO;
-import com.example.myhealthblock.api.healthdata.dto.response.TreatmentInfoResponseDTO;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.*;
+import org.apache.commons.codec.digest.DigestUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.http.HttpStatus;
@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
-import lombok.RequiredArgsConstructor;
+import java.util.HashMap;
+import java.util.Map;
+
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/api")
@@ -23,7 +25,6 @@ public class ApiController {
     private Long savedTwoWayTimestamp;
     private int savedJobIndex;
     private int savedThreadIndex;
-
 
     @PostMapping("/v1/medical-api/medical-history/first-request")
     public ResponseEntity<String> requestMedicalHistory(@RequestBody MedicalHistoryFirstRequestDTO body) {
@@ -36,7 +37,7 @@ public class ApiController {
 
             System.out.println(response);
             System.out.println("medical api 1차 호출");
-            return new ResponseEntity<>("medical api 1차 인증 요청", HttpStatus.OK);
+            return new ResponseEntity<>("500 Internal Server Error", HttpStatus.INTERNAL_SERVER_ERROR);
         } catch (Exception e) {
             e.printStackTrace();
             return new ResponseEntity<>("500 Internal Server Error", HttpStatus.INTERNAL_SERVER_ERROR);
@@ -126,7 +127,7 @@ public class ApiController {
     }
 
     @PostMapping("/v1/medical-api/medical-history/second-request")
-    public ResponseEntity<MedicalHistoryResponseDTO> requestMedicalHistorySecond(@RequestBody MedicalHistorySecondRequestDTO body) {
+    public ResponseEntity<String> requestMedicalHistorySecond(@RequestBody MedicalHistorySecondRequestDTO body) {
         try {
             if (savedJti == null || savedTwoWayTimestamp == null) {
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -137,11 +138,7 @@ public class ApiController {
             body.setThreadIndex(savedThreadIndex);
 
             System.out.println("medical api 2차 호출");
-            MedicalHistoryResponseDTO response = apiService.requestCertificationMedicalHistory(body);
-
-            if ("CF-12003".equals(response.getResult().getCode())) {
-                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-            }
+            String response = apiService.requestCertificationMedicalHistory(body);
             return new ResponseEntity<>(response, HttpStatus.OK);
         } catch (Exception e) {
             e.printStackTrace();
@@ -150,7 +147,7 @@ public class ApiController {
     }
 
     @PostMapping("/v1/medical-api/treatment-information/second-request")
-    public ResponseEntity<TreatmentInfoResponseDTO<?>> requestCertificationTreatmentInformation(@RequestBody TreatmentInfoSecondRequestDTO body) {
+    public ResponseEntity<Object> requestCertificationTreatmentInformation(@RequestBody TreatmentInfoSecondRequestDTO body) {
         try {
             if (savedJti == null || savedTwoWayTimestamp == null) {
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -161,8 +158,27 @@ public class ApiController {
             body.setThreadIndex(savedThreadIndex);
 
             System.out.println("treatment api 2차 호출");
-            TreatmentInfoResponseDTO<?> response = apiService.requestCertificationTreatmentInformation(body);
-            return new ResponseEntity<>(response, HttpStatus.OK);
+            String data = apiService.requestCertificationTreatmentInformation(body);
+            String savedHash = DigestUtils.sha256Hex(data);
+            String contract_code = String.format("def store_hash():\n    return '%s'", savedHash);
+
+            BlockchainTransactionRequestDTO blockchainRequest = new BlockchainTransactionRequestDTO(
+                    "medical_institute",
+                    "blockchain",
+                    0,
+                    new BlockchainTransactionRequestDTO.SmartContract(contract_code)
+            );
+
+            BlockchainClient blockchainClient = new BlockchainClient();
+            String contract_address = blockchainClient.registerHash(savedHash).block();
+            System.out.println(contract_address);
+
+            Map<String, Object> responseData = new ObjectMapper().readValue(data, Map.class);
+            Map<String, Object> responseMap = new HashMap<>();
+            responseMap.put("data", responseData);
+            responseMap.put("contract_address", contract_address);
+            return new ResponseEntity<>(responseMap, HttpStatus.OK);
+
         } catch (Exception e) {
             e.printStackTrace();
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -170,7 +186,7 @@ public class ApiController {
     }
 
     @PostMapping("/v1/medical-api/health-checkup-result/second-request")
-    public ResponseEntity<HealthCheckupResponseDTO<?>> requestCertificationHealthCheckupResult(@RequestBody HealthCheckupSecondRequestDTO body) {
+    public ResponseEntity<Object> requestCertificationHealthCheckupResult(@RequestBody HealthCheckupSecondRequestDTO body) {
         try {
             if (savedJti == null || savedTwoWayTimestamp == null) {
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -181,11 +197,44 @@ public class ApiController {
             body.setThreadIndex(savedThreadIndex);
 
             System.out.println("healthCheckup api 2차 호출");
-            HealthCheckupResponseDTO<?> response = apiService.requestCertificationHealthCheckupResult(body);
-            return new ResponseEntity<>(response, HttpStatus.OK);
+            String data = apiService.requestCertificationHealthCheckupResult(body);
+
+            String savedHash = DigestUtils.sha256Hex(data);
+            String contract_code = String.format("def store_hash():\n    return '%s'", savedHash);
+
+            BlockchainTransactionRequestDTO blockchainRequest = new BlockchainTransactionRequestDTO(
+                    "medical_institute",
+                    "blockchain",
+                    0,
+                    new BlockchainTransactionRequestDTO.SmartContract(contract_code)
+            );
+
+            BlockchainClient blockchainClient = new BlockchainClient();
+            String contract_address = blockchainClient.registerHash(savedHash).block();
+            System.out.println(contract_address);
+
+            Map<String, Object> responseData = new ObjectMapper().readValue(data, Map.class);
+
+            if (responseData.containsKey("jti")) {
+                return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+            }
+
+            Map<String, Object> responseMap = new HashMap<>();
+            responseMap.put("data", responseData);
+            responseMap.put("contract_address", contract_address);
+            return new ResponseEntity<>(responseMap, HttpStatus.OK);
         } catch (Exception e) {
             e.printStackTrace();
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
+    }
+
+    @Getter
+    @Setter
+    @AllArgsConstructor
+    @NoArgsConstructor
+    static class ApiResponse{
+        private String data;
+        private String contactAddress;
     }
 }

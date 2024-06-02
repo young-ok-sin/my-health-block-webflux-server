@@ -20,4 +20,16 @@ public class MedicationDetailDTO {
     private String resPrescribeDays;
     private String resDrugCode;
     private String resDrugImageLink;
+
+    @Override
+    public String toString() {
+        return resTreatDate
+                + resTreatTypeDet
+                + resPrescribeCntDet
+                + resPrescribeDrugName
+                + resPrescribeDrugEffect
+                + resPrescribeDays
+                + resDrugCode
+                + resDrugImageLink;
+    }
 }
