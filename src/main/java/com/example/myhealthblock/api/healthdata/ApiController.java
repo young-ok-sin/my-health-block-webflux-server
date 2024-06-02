@@ -37,7 +37,7 @@ public class ApiController {
 
             System.out.println(response);
             System.out.println("medical api 1차 호출");
-            return new ResponseEntity<>("medical api 1차 인증 요청", HttpStatus.OK);
+            return new ResponseEntity<>("500 Internal Server Error", HttpStatus.INTERNAL_SERVER_ERROR);
         } catch (Exception e) {
             e.printStackTrace();
             return new ResponseEntity<>("500 Internal Server Error", HttpStatus.INTERNAL_SERVER_ERROR);
@@ -214,6 +214,11 @@ public class ApiController {
             System.out.println(contract_address);
 
             Map<String, Object> responseData = new ObjectMapper().readValue(data, Map.class);
+
+            if (responseData.containsKey("jti")) {
+                return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+            }
+
             Map<String, Object> responseMap = new HashMap<>();
             responseMap.put("data", responseData);
             responseMap.put("contract_address", contract_address);
