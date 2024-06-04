@@ -42,6 +42,8 @@ public class QuestionController {
         QuestionDTO[] list = null;
         if (userId != null) {
             list = questionService.getQuestionsWithDetail(userId);
+        } else if (category == Category.ENTIRE){
+            list = questionService.getQuestionsWithDetail();
         } else if (category != null){
             list = questionService.getQuestionsWithDetail(category);
         } else if (opinionUserId != null) {
