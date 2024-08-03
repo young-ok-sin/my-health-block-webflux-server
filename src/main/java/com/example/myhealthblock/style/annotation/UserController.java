@@ -24,6 +24,6 @@ public class UserController {
 
     @DeleteMapping("/{id}")
     public Mono<String> deleteUser(@PathVariable String id) {
-        return Mono.just("User ID: " + id + " deleted");
+        return Mono.just("User ID: " + id + " deleted").log();
     }
 }
